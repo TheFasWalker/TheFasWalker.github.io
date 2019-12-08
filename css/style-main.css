@@ -445,8 +445,6 @@ input[type="search"]:focus {
 }
 
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 .sec4 ul a {
     text-decoration: none;
     color: #a1a1a1;
@@ -483,16 +481,19 @@ input[type="search"]:focus {
 .sec4-flex {
     width: 100%;
     min-height: 677px;
-    margin: 0 375px 0 375px;
+    margin: 0 0px 0 300px;
     display: flex;
-    flex-wrap: wrap
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: 100%;
+  
 }
 
 .sec4-box {
     height: 370px;
     width: 337px;
     position: relative;
-    padding: 15px
+    padding: 60px
 }
 
 .sec4-box:hover .sec4-box-btn-lock {
