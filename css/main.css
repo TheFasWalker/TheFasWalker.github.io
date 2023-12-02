@@ -11,6 +11,14 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+.my-description{
+    max-width: 1200px;
+    text-align: left;
+}
+.my-description p{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
 
 .App {
     text-align: center;
