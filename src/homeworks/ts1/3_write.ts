@@ -113,6 +113,14 @@ export const createRandomProduct = (createdAt: string) :Product => {
  * Создает случайную операцию (Operation).
  * Принимает дату создания (строка)
  * */
+
+const productTypes:string[]=['Products', 'Household goods','cloth','tools']
+function getRandomProductType(productTypethLength:number):number{
+    let min = 0;
+    productTypethLength = Math.floor(productTypethLength);
+    return Math.floor(Math.random() * (productTypethLength - min) + min); 
+
+}
 export const createRandomOperation = (createdAt: string): Operation => {
     let randomOperationIndex = Math.floor(Math.random() * 100 % 2)
     let id;
@@ -124,13 +132,13 @@ export const createRandomOperation = (createdAt: string): Operation => {
     if (randomOperationIndex == 0) {
         id = '001';
         name = "Покупка";
-        amount = 12
-        categoryName = "Products"
+        amount = Math.floor(Math.random() *100)
+        categoryName = productTypes[0]
     } else {
         id = '002';
         name = 'Продажа';
-        amount = 123;
-        categoryName = 'Not Products'
+        amount =Math.floor(Math.random() *100);
+        categoryName =productTypes[Math.floor(Math.random() *100)]
     }
     const category: Category = {
         id: id,
