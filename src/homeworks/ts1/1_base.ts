@@ -62,12 +62,34 @@ export const hex2rgb = (color:string) :colorRgba => {
   return [red, green, blue];
 };
 
-export const getNumberedArray = (arr:Array<any>) => arr.map((value, number) => ({ value, number }));
-export const toStringArray = (arr:Array<any>) => arr.map(({ value, number }) => `${value}_${number}`);
+type arrayItem<arrItem> = {
+  value:arrItem,
+  number:number
+}
 
-export const transformCustomers = (customers:Array<any>) => {
-  return customers.reduce((acc, customer) => {
+export const getNumberedArray = <arrItem>(arr: Array<arrItem>) :arrayItem<arrItem>[] => 
+  arr.map((value:arrItem, number: number) => ({ value, number }));
+  
+export const toStringArray =<arrItem>(arr:arrayItem<arrItem>[]) : string[] =>
+ arr.map(({ value, number }:arrayItem<arrItem>):string => `${value}_${number}`);
+
+ type customerType= {
+  id:number,
+  name:string,
+  age:number,
+  isSubscribed:boolean
+ }
+
+type transformerCustomerType = 
+  Record<number , {
+    name:string,
+    age:number,
+    isSubscribed:boolean }
+    >
+
+export const transformCustomers = (customers:customerType[]) :transformerCustomerType => {
+  return customers.reduce((acc, customer :customerType) => {
     acc[customer.id] = { name: customer.name, age: customer.age, isSubscribed: customer.isSubscribed };
     return acc;
-  }, {});
+  }, {}as transformerCustomerType);
 };
