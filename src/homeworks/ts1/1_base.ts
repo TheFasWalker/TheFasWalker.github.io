@@ -44,7 +44,7 @@ export const getContrastType = (contrastValue:number) :contrastType => (contrast
 export const shortColorRegExp = /^#[0-9a-f]{3}$/i;
 export const longColorRegExp = /^#[0-9a-f]{6}$/i;
 
-export const checkColor = (color:string) => {
+export const checkColor = (color:string) :void => {
   if (!longColorRegExp.test(color) && !shortColorRegExp.test(color)) throw new Error(`invalid hex color: ${color}`);
 };
 
@@ -67,9 +67,9 @@ type arrayItem<arrItem> = {
   number:number
 }
 
-export const getNumberedArray = <arrItem>(arr: Array<arrItem>) :arrayItem<arrItem>[] => 
+export const getNumberedArray = <arrItem>(arr: Array<arrItem>) :arrayItem<arrItem>[] =>
   arr.map((value:arrItem, number: number) => ({ value, number }));
-  
+
 export const toStringArray =<arrItem>(arr:arrayItem<arrItem>[]) : string[] =>
  arr.map(({ value, number }:arrayItem<arrItem>):string => `${value}_${number}`);
 
@@ -78,14 +78,15 @@ export const toStringArray =<arrItem>(arr:arrayItem<arrItem>[]) : string[] =>
   name:string,
   age:number,
   isSubscribed:boolean
- }
+}
+// type transformerCustomerType =
+//   Record<number , {
+//     name:string,
+//     age:number,
+//     isSubscribed:boolean }
+//     >
 
-type transformerCustomerType = 
-  Record<number , {
-    name:string,
-    age:number,
-    isSubscribed:boolean }
-    >
+type transformerCustomerType = Omit<customerType, 'id'>
 
 export const transformCustomers = (customers:customerType[]) :transformerCustomerType => {
   return customers.reduce((acc, customer :customerType) => {
