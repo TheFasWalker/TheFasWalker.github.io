@@ -43,3 +43,15 @@
      }
 
 }
+.header{
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     padding-top: 25px;
+     padding-bottom: 25px;
+     max-width:100%
+}
+.active{
+     color: #000000;
+     font-weight: 700;
+}

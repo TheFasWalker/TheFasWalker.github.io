@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Dispatch, State } from '../../components/context/ThemeContext';
+import type { Dispatch, State } from '../context/ThemeContext';
 import { Button } from '../button/Button';
 
 export type themeControlsButtonProps = {

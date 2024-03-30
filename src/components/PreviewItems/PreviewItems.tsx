@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styles from './PreviewItems.module.scss';
 import { Button } from '../button/Button';
+import { NavLink } from 'react-router-dom';
 
 export type obj = {
   operationName: string;
