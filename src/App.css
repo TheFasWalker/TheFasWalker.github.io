@@ -51,3 +51,7 @@
      padding-bottom: 25px;
      max-width:100%
 }
+.active{
+     color: #000000;
+     font-weight: 700;
+}

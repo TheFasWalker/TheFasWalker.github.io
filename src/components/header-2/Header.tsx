@@ -9,13 +9,13 @@ export const Header = () => {
             <NavLink className={cl.logo} to="/">logo</NavLink>
                 <ul>
                 <li>
-                    <NavLink to="/profile"> Profile</NavLink>
+                    <NavLink to="/profile"> Профиль</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/operations"> Operationse</NavLink>
+                    <NavLink to="/operations"> Операции</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/*"> error</NavLink>
+                    <NavLink to="/*"> 404</NavLink>
                 </li>
             </ul>
             </div>

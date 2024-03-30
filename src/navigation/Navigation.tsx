@@ -16,7 +16,7 @@ export const Navigation: FC= () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="operations" element={<OperationsPage />} >
-                    <Route path=":id" element={<OperationPage />} />
+                    <Route path=":id" element={<OperationPage/>}/>
                 </Route >
 
                 <Route path="profile" element={<ProfilePage />} />
