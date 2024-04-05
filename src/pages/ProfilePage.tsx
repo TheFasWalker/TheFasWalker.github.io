@@ -11,6 +11,7 @@ export const ProfilePage = () => {
     const [popupState, setPopupState]= useState(searchParams.get('modal')=='true'? true:false)
     return (
         <>
+
             <Header />
             {searchParams.get('modal')}
             <Layout>
