@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+.my-description{
+    text-align: left;
+    padding-bottom: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.my-description p{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.container{
+     max-width:1920px;
+     padding-left: 50px;
+     padding-right: 50px;
+}
+
+.languageSection{
+     max-width: 100%;
+     display: flex;
+     flex-direction: column;
+     border-radius: 10px;
+     background-color: antiquewhite;
+     padding: 0 25px;
+}
+.textField{
+     padding-top: 15px;
+     padding-bottom: 15px;
+     text-align: center;
+}
+.textField__author{
+     text-align: center;
+
+}
+.textField__author span{
+     font-style: italic;
+}
+.darck{
+     background-color: #000000;
+     color: #ffffff;
+}
+.wrapper{
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     grid-template-rows: 1fr 1fr;
+     grid-gap: 40px;
+     height: 80vh;
+     .item{
+          box-shadow: 0px 0px 8px 9px rgba(34, 60, 80, 0.2);
+          padding: 10px;
+          border-radius: 20px;
+          height: 100%;
+          width: 100%;
+     }
+
+}
+.header{
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     padding-top: 25px;
+     padding-bottom: 25px;
+     max-width:100%
+}
+.active{
+     color: #000000;
+     font-weight: 700;
+}
+.header-module_logo-NAGQM{height:50px;width:50px;border-radius:50%;background-color:green;display:flex;align-items:center;justify-content:center}.header-module_headerContainer-ua3vs{max-width:1920px;padding-left:50px;padding-right:50px;display:flex;align-items:center;flex-direction:row;width:100%}header{display:flex;flex-direction:row;background-color:#5f9ea0}header ul{display:flex;flex-direction:row;list-style-type:none}header li{padding:5px;margin-right:10px}
+.Layout-module_container-Fpbi4{padding-top:20px}
+.PreviewItems-module_item-ZBfC9{padding:15px;margin-bottom:20px;background-color:#f0f8ff;border-radius:10px;display:grid;grid-template-columns:1fr 200px;grid-template-areas:"title title" "category total" "desc desc" "button button"}.PreviewItems-module_title-zAi6B{grid-area:title;display:flex;flex-direction:column;align-items:flex-start}.PreviewItems-module_category-RbTjl{grid-area:category;display:flex;flex-direction:column;align-items:flex-start}.PreviewItems-module_desc-TJgz6{grid-area:desc;display:flex;flex-direction:column;align-items:flex-start;max-height:50px;overflow:hidden}.PreviewItems-module_button-VnkV9{grid-area:button}
+.Button-module_button-AFfZF{padding:0;margin:0;border:none;cursor:pointer;box-sizing:border-box}.Button-module_header-pfCIm{color:#fff;font-size:18px;font-style:normal;font-weight:600;line-height:140%;border-radius:10px;background:#ebb13e;padding:20px;border:1px solid #ebb13e;transition:all .3s linear}.Button-module_header-pfCIm:hover{background:#fff;color:#ebb13e;transition:all .3s linear}.Button-module_base-kNdDs{color:#fff;font-size:16px;font-style:normal;font-weight:600;line-height:140%;padding:20px;border-radius:10px;background:#272f44;transition:all .5s linear}.Button-module_base-kNdDs:hover{color:#433720;background-color:#ebb13e;border-radius:40px;transition:all .5s linear}.Button-module_footer-pujd7{border-radius:10px;background:#433720;color:#fff;font-size:16px;font-style:normal;font-weight:600;line-height:140%;padding:20px}.Button-module_darck-WbOtU{background-color:#000;color:#fff}.Button-module_darckButton-zFslF{background-color:red;color:#fff}.Button-module_darckButton-zFslF:hover{background-color:#b24747}
+.PopupWrapper-module_wrapper-ARFw9{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.4784313725);width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:11}.PopupWrapper-module_container-SoN3U{max-width:400px;padding:25px 15px;background-color:#fff;position:relative}.PopupWrapper-module_closeButton-Nqnfc{position:absolute;right:0;top:0;cursor:pointer}
+
+/*# sourceMappingURL=main.css.map*/
