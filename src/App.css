@@ -55,3 +55,14 @@
      color: #000000;
      font-weight: 700;
 }
+.errorPage{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     h1{
+          font-size: 45px;
+          padding-top: 50px;
+          padding-bottom: 50px;
+     }
+
+}

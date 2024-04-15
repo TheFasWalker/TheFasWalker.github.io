@@ -33,3 +33,23 @@ header{
         }
     }
 }
+.loginButton{
+    height: 50px;
+    width:150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 20px;
+    margin-left: auto;
+    cursor: pointer;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    label{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { PreviewItems } from "src/components/PreviewItems/PreviewItems";
-import { Header } from "src/components/header-2/Header";
+
 import { Layout } from "src/components/lauout/Layout";
 
 export const OperationsPage = () => {
@@ -45,7 +45,7 @@ export const OperationsPage = () => {
   ];
     return (
         <>
-            <Header />
+
             <Layout>
                 <PreviewItems
                 elementsData={operations}
