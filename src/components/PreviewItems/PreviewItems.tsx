@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import styles from './PreviewItems.module.scss';
-import { Button } from '../button/Button';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export type obj = {
   operationName: string;
@@ -36,9 +35,9 @@ export const PreviewItems: FC<PreviewItemsProps> = ({ elementsData, ...props }) 
             <span>Краткое описание:</span>
             {elementData.description}
           </p>
-          <Button itemClass={`${styles.button}`} buttonData={elementData.operationId}>
+          <NavLink to={`${elementData.operationId}`} className={`${styles.button}`} >
             show More
-          </Button>
+          </NavLink>
         </div>
       ))}
     </>

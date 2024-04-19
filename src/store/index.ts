@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReduser from './authSlise'
+import dataReduser from './dataSlise'
 
 export const store = configureStore({
     reducer: {
-        auth:authReduser,
+        auth: authReduser,
+        data: dataReduser
     }
 })
 

@@ -1,13 +1,17 @@
 import React from "react";
-import { Header } from "src/components/header-2/Header";
 import { Layout } from "src/components/lauout/Layout";
-
-export const CreateOperationPage= () => {
+import { CreatingOperationForm } from "src/components/Forms/CreatingOperationForm";
+import { redirect } from 'react-router-dom';
+export const CreateOperationPage = () => {
+    const redirectFunc = () => {
+        console.log('redirect')
+        return redirect('/operations' );
+}
     return (
-        <>
-            <Layout>
-Стравница создания операции
+        <Layout>
+            <h1>Cтраница создания операции</h1>
+            <CreatingOperationForm redirectFunc={()=>redirectFunc() } />
         </Layout>
-        </>
+
     )
 }

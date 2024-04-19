@@ -6,14 +6,15 @@ import { useSelector,useDispatch } from "react-redux";
 import { RootState, } from "src/store";
 import {authLogIn, authLogOut} from '../../store/authSlise'
 import { Field, Form, Formik } from "formik";
+import {addOperartion,removeOperation} from '../../store/dataSlise'
 const loginData = {
     'login': 'login',
     'password':'pass'
 }
 
+
 export const Header = () => {
-    //данные из стора
-    const authState = useSelector((state:RootState) => state.auth.login)
+    const authState = useSelector((state: RootState) => state.auth.login)
     const dispatch = useDispatch()
     const cookeyKey = 'asedstrt1w';
     const [loginPopupState, setLoginPopupState] = useState(false);
@@ -34,6 +35,10 @@ export const Header = () => {
             dispatch(authLogIn())
         }
     })
+
+
+
+
 
     return (
         <header className={cl.header}>
