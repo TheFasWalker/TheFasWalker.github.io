@@ -7,42 +7,95 @@ import { RootState, } from "src/store";
 import {authLogIn, authLogOut} from '../../store/authSlise'
 import { Field, Form, Formik } from "formik";
 import {addOperartion,removeOperation} from '../../store/dataSlise'
-const loginData = {
-    'login': 'login',
-    'password':'pass'
-}
+import { fetchData } from "src/client/fetch";
+import { SignUpBody, User,AuthResult, Filters, Operations } from "src/client/types";
+
 
 
 export const Header = () => {
     const authState = useSelector((state: RootState) => state.auth.login)
     const dispatch = useDispatch()
-    const cookeyKey = 'asedstrt1w';
+
     const [loginPopupState, setLoginPopupState] = useState(false);
     const getCookie = (name:string) => {
         let cookies = document.cookie.split('; ').find(row => row.startsWith(name + '='));
         return cookies ? cookies.split('=')[1]:null
     }
-    const LogInFunc = () => {
-        document.cookie =`loginAuth=${cookeyKey}`
-        dispatch(authLogIn())
-    }
+
     const LogOutFunc = () => {
         document.cookie = `loginAuth=`
         dispatch(authLogOut())
     }
-    useEffect(() => {
-        if (getCookie('loginAuth') == cookeyKey) {
-            dispatch(authLogIn())
+
+    const regiastrationData = {
+        login:'fast@rest.test',
+        password: '1235',
+        commandId:''
+
+    }
+
+
+    const fetchDataArray = () => {
+        fetchData<Operations>('/operations', {
+            method:"GET"
+        })
+            .then((res) => {
+                dispatch({type:'error', payload: res})
+            console.log(res.data)
+        }).catch((e)=> console.log(e))
+    }
+
+
+    const registration = (email: string, password: string, commandId?: string) => {
+        const registrationData = {
+            email: `${email}`,
+            password: `${password}`,
+            commadId:`${commandId}`
         }
-    })
+        fetchData<SignUpBody>('/signup', {
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registrationData)
 
+        }).then((res) => {
+            dispatch({ type: 'error', payload: res })
+            console.log(res)
+        }).catch((e)=>console.log(e))
 
+    }
 
+    const loginWithData = (email:string, password:string) => {
+        const data = {
+            email,
+            password
+        }
+        fetchData<AuthResult>('/signin', {
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((res) => {
+            dispatch({ type: "data", payload: res })
+            document.cookie =`loginAuth=${res.token}`
+            dispatch(authLogIn(res.token))
+        }).catch((e)=>console.log(e))
+    }
 
+    useEffect(() => {
+        if (getCookie('loginAuth') != '' || null ) {
+            dispatch(authLogIn(getCookie('loginAuth')))
+        }
+    },[])
 
     return (
         <header className={cl.header}>
             <div className={cl.headerContainer}>
+                <button onClick={() => fetchDataArray()}>getData</button>
+                {/* <button onClick={() => registration(regiastrationData.login, regiastrationData.password, regiastrationData.commandId)}>registration</button> */}
+                {/* <button onClick={()=>console.log(getCookie('loginAuth'))}>get cookies</button> */}
             <NavLink className={cl.logo} to="/">logo</NavLink>
                 <ul>
                     {!authState ||
@@ -77,17 +130,15 @@ export const Header = () => {
                     }}
                     onSubmit={values => {
                         console.log(values)
-                        if (values.password == loginData.password && values.userName == loginData.login) {
-                            console.log('yes')
-                            LogInFunc()
-                            setLoginPopupState(!loginPopupState)
-                        }
+                        // loginWithData(values.userName, values.password)
+                        loginWithData(regiastrationData.login, regiastrationData.password)
+                        setLoginPopupState(!loginPopupState)
                     }}
                 >
                     {({ errors, touched }) => (
                         <Form className={cl.form}>
-                            <span>login: {loginData.login }</span>
-                            <span>password: {loginData.password}</span>
+                            <span>login: {regiastrationData.login }</span>
+                            <span>password: {regiastrationData.password}</span>
                             <label>
                                 <span>login</span>
                                 <Field

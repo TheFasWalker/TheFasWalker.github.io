@@ -4,19 +4,14 @@ import { Navigation } from './navigation/Navigation';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-
-
-
 function App() {
-
-
-
   return (
-    <Provider store={store}>
-      <Navigation />
-    </Provider>
 
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
   );
 }
 
 export default App;
+// import './i18n';

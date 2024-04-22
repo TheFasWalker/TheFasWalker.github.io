@@ -7,10 +7,9 @@ import React, { FC} from 'react';
 
 export const ProtectedNavigation:FC = () => {
     const authState = useSelector((state: RootState) => state.auth.login)
-
-    if (!authState) {
+    if (authState == '' || authState == null) {
        return <Navigate to="/" replace />
     }
-    return !authState ? <Navigate to="/" replace /> : <Outlet/>
+    return (authState == '') ? <Navigate to="/" replace /> : <Outlet/>
 
 }
