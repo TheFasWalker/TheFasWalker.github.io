@@ -1,45 +1,44 @@
 import React, { FC } from 'react';
 import styles from './PreviewItems.module.scss';
 import { Link, NavLink } from 'react-router-dom';
+import { Params } from 'src/client/types';
 
-export type obj = {
-  operationName: string;
-  category: string;
-  total: string;
-  description: string;
-  operationId: string;
-};
+
 
 export type PreviewItemsProps = {
-  elementsData: Array<obj>;
+  elementsData: Array<Params>;
 };
 
 export const PreviewItems: FC<PreviewItemsProps> = ({ elementsData, ...props }) => {
   return (
     <>
+      <div className={styles.wrapper}>
       {elementsData.map((elementData, index) => (
         <div className={styles.item} key={index}>
           <h2 className={styles.title}>
             <span>Название операции:</span>
-            {elementData.operationName}
+            {elementData.name}
           </h2>
           <span className={styles.category}>
             <span>Категория операции: </span>
-            {elementData.category}
+            {elementData.categoryId}
           </span>
           <span className={styles.total}>
             <span>Стоимость операции:</span>
-            {elementData.total}
-          </span>
+            {elementData.amount}
+          </span>{}
           <p className={styles.desc}>
             <span>Краткое описание:</span>
-            {elementData.description}
+            {elementData.desc ? elementData.desc : 'Описание отсутсвует' }
           </p>
-          <NavLink to={`${elementData.operationId}`} className={`${styles.button}`} >
+          <NavLink to={`${elementData.id}`} className={`${styles.button}`} >
             show More
           </NavLink>
         </div>
       ))}
+
+      </div>
+
     </>
   );
 };

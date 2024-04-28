@@ -7,41 +7,88 @@ import { RootState, } from "src/store";
 import {authLogIn, authLogOut} from '../../store/authSlise'
 import { Field, Form, Formik } from "formik";
 import {addOperartion,removeOperation} from '../../store/dataSlise'
-const loginData = {
-    'login': 'login',
-    'password':'pass'
+import { fetchData } from "src/client/fetch";
+import { AuthResult, Params, SignUpBody } from "src/client/types";
+import { getCookie } from "../helpers/cookies";
+
+const registretionData = {
+    login: 'login42@login.login',
+    password: 'login',
+    commandId:'aasd12312312312312361542349182712178939187212478qw3'
 }
+const registretionData2 = {
+    login: 'test42@test.test',
+    password: 'login'
+}
+
 
 
 export const Header = () => {
     const authState = useSelector((state: RootState) => state.auth.login)
     const dispatch = useDispatch()
-    const cookeyKey = 'asedstrt1w';
     const [loginPopupState, setLoginPopupState] = useState(false);
-    const getCookie = (name:string) => {
-        let cookies = document.cookie.split('; ').find(row => row.startsWith(name + '='));
-        return cookies ? cookies.split('=')[1]:null
+
+    const registration = (email: string, password: string, commandId?: string) => {
+        const registrationData = {
+            email: `${email}`,
+            password: `${password}`,
+            commadId:`${commandId}`
+        }
+        fetchData<AuthResult>('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(registrationData),
+        }).then((res) => {
+            dispatch({ type: 'data', payload: res })
+            document.cookie = `loginAuth=${res.token}`
+            dispatch(authLogIn(res.token))
+        }).catch((e)=>console.log(e))
     }
-    const LogInFunc = () => {
-        document.cookie =`loginAuth=${cookeyKey}`
-        dispatch(authLogIn())
+    const login = (email: string, password: string) => {
+        const loginData = {
+            email: `${email}`,
+            password:`${password}`
+        }
+        fetchData<AuthResult>('/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(loginData)
+        }).then((res) => {
+            dispatch({ type: 'data', payload: res })
+            document.cookie = `loginAuth=${res.token}`
+            dispatch(authLogIn(res.token))
+        }).catch((e)=>console.log(e))
     }
     const LogOutFunc = () => {
         document.cookie = `loginAuth=`
         dispatch(authLogOut())
     }
+
     useEffect(() => {
-        if (getCookie('loginAuth') == cookeyKey) {
-            dispatch(authLogIn())
+        if (getCookie('loginAuth') != '' || null ) {
+            dispatch(authLogIn(getCookie('loginAuth')))
         }
-    })
+    }, [])
 
+    const fetchDataArray = () => {
+        fetchData<Params>('/operations', {
+            method: "GET",
 
-
-
+        })
+            .then((res) => {
+                dispatch({type:'error', payload: res})
+            console.log(res)
+        }).catch((e)=> console.log(e))
+    }
 
     return (
         <header className={cl.header}>
+            <button onClick={() => fetchDataArray()}>fetch Data</button>
+            <button onClick={()=>registration(registretionData2.login, registretionData2.password)}>registration</button>
             <div className={cl.headerContainer}>
             <NavLink className={cl.logo} to="/">logo</NavLink>
                 <ul>
@@ -76,18 +123,15 @@ export const Header = () => {
                         password: ''
                     }}
                     onSubmit={values => {
-                        console.log(values)
-                        if (values.password == loginData.password && values.userName == loginData.login) {
-                            console.log('yes')
-                            LogInFunc()
                             setLoginPopupState(!loginPopupState)
-                        }
+                            login(values.userName, values.password)
+
                     }}
                 >
                     {({ errors, touched }) => (
                         <Form className={cl.form}>
-                            <span>login: {loginData.login }</span>
-                            <span>password: {loginData.password}</span>
+                            <span>login: {registretionData2.login }</span>
+                            <span>password: {registretionData.password}</span>
                             <label>
                                 <span>login</span>
                                 <Field

@@ -1,14 +1,36 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "src/client/fetch";
+import { Params, fetchDataFromServer } from "src/client/types";
 import { PreviewItems } from "src/components/PreviewItems/PreviewItems";
 import { Layout } from "src/components/lauout/Layout";
 import { RootState } from "src/store";
+import { addOperationsToStorage } from "src/store/dataSlise";
 
 
 export const OperationsPage = () => {
 
-    const operations = useSelector((state: RootState) => state.data)
+    const dispatch = useDispatch();
+    const dataState = useSelector((state: RootState) => state.data)
 
+    const getDataArray = () => {
+        fetchData<fetchDataFromServer>('/operations', {
+            method:"GET"
+        })
+            .then((res) => {
+                dispatch({ type: 'error', payload: res })
+
+                dispatch(addOperationsToStorage(res.data))
+        }).catch(e=>console.log(e))
+    }
+
+    const operations = useSelector((state: RootState) => state.data)
+    useEffect(() => {
+        if (operations.length == 0) {
+        getDataArray()
+        }
+    }, [])
+    // console.log(operations)
     return (
         <>
 

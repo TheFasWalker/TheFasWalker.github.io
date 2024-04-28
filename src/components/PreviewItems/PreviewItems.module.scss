@@ -1,6 +1,6 @@
 .item{
     padding: 15px;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     background-color: aliceblue;
     border-radius: 10px;
     display: grid;
@@ -34,4 +34,9 @@
 }
 .button{
     grid-area: button;
+}
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
 }
