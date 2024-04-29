@@ -6,42 +6,76 @@ import { useSelector,useDispatch } from "react-redux";
 import { RootState, } from "src/store";
 import {authLogIn, authLogOut} from '../../store/authSlise'
 import { Field, Form, Formik } from "formik";
-import {addOperartion,removeOperation} from '../../store/dataSlise'
+import { addOperartion, removeOperation } from '../../store/dataSlise'
+import { fetchData } from "src/client/fetch";
+import { AuthResult } from "src/client/types";
+import { getCookie, writeСookies } from "../Helpers/cookiesFunctions";
+
 const loginData = {
-    'login': 'login',
-    'password':'pass'
+    'login': 'test42@test42.test',
+    'password': 'qwerasdf',
+    'commandId':'3219871365asd4f95519aas98df'
 }
 
 
 export const Header = () => {
     const authState = useSelector((state: RootState) => state.auth.login)
     const dispatch = useDispatch()
-    const cookeyKey = 'asedstrt1w';
     const [loginPopupState, setLoginPopupState] = useState(false);
-    const getCookie = (name:string) => {
-        let cookies = document.cookie.split('; ').find(row => row.startsWith(name + '='));
-        return cookies ? cookies.split('=')[1]:null
+
+
+
+    const logIn = (login: string, password: string) => {
+        const data = {
+            email: `${login}`,
+            password: `${password}`
+        }
+        fetchData<AuthResult>('/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(data)
+        }).then((res) => {
+            dispatch({ type: 'error', payload: res })
+            writeСookies('loginAuth',res.token)
+            dispatch(authLogIn(res.token))
+        }).catch(e=>console.log(e))
     }
-    const LogInFunc = () => {
-        document.cookie =`loginAuth=${cookeyKey}`
-        dispatch(authLogIn())
+
+    const registration = (login: string, password: string, commandId?: string) => {
+        const data = {
+            email: `${login}`,
+            password: `${password}`,
+            commandId: `${commandId}`
+        }
+        fetchData<AuthResult>('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((res) => {
+            dispatch({ type: 'error', payload: 'res' })
+            writeСookies('loginAuth', res.token)
+            console.log(res.token)
+        }).catch(e => console.log(e))
     }
-    const LogOutFunc = () => {
+
+    const logOut = () => {
         document.cookie = `loginAuth=`
         dispatch(authLogOut())
     }
+
     useEffect(() => {
-        if (getCookie('loginAuth') == cookeyKey) {
-            dispatch(authLogIn())
+        if (getCookie('loginAuth')) {
+            dispatch(authLogIn(getCookie('loginAuth')))
         }
     })
 
-
-
-
-
     return (
         <header className={cl.header}>
+            <button onClick={()=>registration(loginData.login, loginData.password, loginData.commandId)}>registration</button>
             <div className={cl.headerContainer}>
             <NavLink className={cl.logo} to="/">logo</NavLink>
                 <ul>
@@ -61,7 +95,7 @@ export const Header = () => {
                 </ul>
                 {authState
                     ?
-                        <button className={cl.loginButton} onClick={()=>LogOutFunc()}>LogOut</button>
+                        <button className={cl.loginButton} onClick={()=>logOut()}>LogOut</button>
                     :
                         <button className={cl.loginButton} onClick={()=> setLoginPopupState(!loginPopupState)}>LogIn</button>
                     }
@@ -77,11 +111,9 @@ export const Header = () => {
                     }}
                     onSubmit={values => {
                         console.log(values)
-                        if (values.password == loginData.password && values.userName == loginData.login) {
-                            console.log('yes')
-                            LogInFunc()
-                            setLoginPopupState(!loginPopupState)
-                        }
+                        logIn(values.userName,values.password)
+                        setLoginPopupState(!loginPopupState)
+
                     }}
                 >
                     {({ errors, touched }) => (
