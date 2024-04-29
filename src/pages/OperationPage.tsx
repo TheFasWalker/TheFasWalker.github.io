@@ -13,8 +13,8 @@ export const OperationPage = () => {
   const { id } = useParams();
   const operationData = operations.filter((elem) => elem.id === id);
   const token = useSelector((state:RootState)=>state.auth.login)
-  // console.log(operationData[0].id)
-console.log('TOKEN = ' + token)
+
+  console.log('TOKEN = ' + token)
 
 
   const deleteOperation = (id: string) => {
@@ -30,26 +30,26 @@ console.log('TOKEN = ' + token)
       dispatch({type:'error',payload:res})
     }).catch(e=>console.log(e))
   };
-  if (operationData) {
+  if (operationData[0]) {
     return (
       <>
         <Layout>
           <div className="operation-wrapper" style={{display:'flex', gap:20,flexDirection:'column'}}>
             <div className="operation__section">
               <span>Название операции:</span>
-              {/* <span> {operationData[0].name}</span> */}
+              <span> {operationData[0].name}</span>
             </div>
             <div className="operation__section">
               <span>Описание операции: </span>
-              {/* <span>{operationData[0].desc}</span> */}
+              <span>{operationData[0].desc}</span>
             </div>
             <div className="operation__section">
               <span>Тип операции: </span>
-              {/* <span>{operationData[0].type}</span> */}
+              <span>{operationData[0].type}</span>
             </div>
             <div className="operation__section">
               <span>Дата операции: </span>
-              {/* <span>{operationData[0].date}</span> */}
+              <span>{operationData[0].date}</span>
             </div>
             <div className="operation-buttons" style={{ gap: 20, display:'flex'}}>
               <Button onClick={() => deleteOperation(operationData[0].id)}> Delete operation</Button>

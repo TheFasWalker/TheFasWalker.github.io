@@ -88,7 +88,7 @@ export const Header = () => {
     return (
         <header className={cl.header}>
             <button onClick={() => fetchDataArray()}>fetch Data</button>
-            <button onClick={()=>registration(registretionData2.login, registretionData2.password)}>registration</button>
+            <button onClick={()=>registration(registretionData.login, registretionData.password)}>registration</button>
             <div className={cl.headerContainer}>
             <NavLink className={cl.logo} to="/">logo</NavLink>
                 <ul>
@@ -130,7 +130,7 @@ export const Header = () => {
                 >
                     {({ errors, touched }) => (
                         <Form className={cl.form}>
-                            <span>login: {registretionData2.login }</span>
+                            <span>login: {registretionData.login }</span>
                             <span>password: {registretionData.password}</span>
                             <label>
                                 <span>login</span>
