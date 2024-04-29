@@ -1,8 +1,13 @@
 import { Field, Form, Formik } from 'formik';
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import cl from './form.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addOperartion } from 'src/store/dataSlise';
+import { RootState } from 'src/store';
+import { fetchData } from 'src/client/fetch';
+import { Category, fetchCategories } from 'src/client/types';
+
+import Select from 'react-select';
 
 
 
@@ -10,65 +15,143 @@ import { addOperartion } from 'src/store/dataSlise';
 export type Props = {
   redirectFunc:()=>void
 }
-export const CreatingOperationForm:FC<Props> = ({redirectFunc}) => {
+export const CreatingOperationForm: FC<Props> = ({ redirectFunc }) => {
   const dispatch = useDispatch();
-  function submitForm(values: any) {
-    const date = new Date();
-    values.operationId = date.toString();
-    values.createdAt = date.getTime.toString();
-    dispatch(addOperartion(values));
-    console.log('submit')
-    redirectFunc()
+  const token = useSelector((state: RootState) => state.auth.login);
+  const [categoriesArray,setCategoriesArray]=useState<Category[]>([])
+
+
+  const getCategories = () => {
+    fetchData<fetchCategories>('/categories', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then((res) => {
+      setCategoriesArray(res.data)
+    }).catch(e=>console.log(e))
   }
 
-  function validateField(value: string) {
+  const submitForm = (values: any)=> {
+    const date = new Date().toISOString();
+
+
+
+    const data = {
+      name: values.name,
+      desc: values.desc,
+      amount: values.amount,
+      type:values.selectType,
+      categoryId: values.categoryId,
+      date : date,
+    }
+    console.log(data)
+    fetchData('/operations', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    }).then(res=> {
+      console.log('asdaa')
+    }).catch(e=>console.log(e))
+
+  }
+
+  const validateField=(value: string)=> {
     if (!value) {
       return 'required';
     }
   }
 
+  const createCategory = (name: string, photo?: string) => {
+    const data = {
+      name: `${name}`,
+      photo:`${photo}`
+    }
+    fetchData('/categories', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    }).then((res) => {
+      console.log(res)
+    }).catch(e=>console.log(e))
+  }
+
+
+
+  useEffect(() => {
+    getCategories()
+
+  },[])
+
   return (
+
     <Formik
       initialValues={{
-        operationName: '',
-        createdAt: '',
-        category: '',
-        total: '',
-        description: '',
-        operationId: '',
+        name: '',
+        desc:'',
+        amount: '',
+        selectType: 'Profit',
+        categoryId:''
       }}
       onSubmit={(values) => {
         submitForm(values);
+
       }}
+
     >
-      {({ errors, touched }) => (
+
+      {({ errors, touched}) => (
         <Form className={cl.formWrapper}>
           <label className={cl.label}>
             <span>Имя операции</span>
-            <Field name="operationName" validate={validateField} />
-            {errors.operationName && touched.operationName && <div className={cl.error}>{errors.operationName}</div>}
+            <Field name="name" validate={validateField} />
+            {errors.name && touched.name && <div className={cl.error}>{errors.name}</div>}
           </label>
           <label className={cl.label}>
-            <span>название операции</span>
+            <span>описание операции</span>
+            <Field name="desc" type="text" validate={validateField} />
+            {errors.desc && touched.desc && <div className={cl.error}>{errors.desc}</div>}
+          </label>
 
-            <Field name="dateOperation" type="date" validate={validateField} />
-            {errors.createdAt && touched.createdAt && <div className={cl.error}>{errors.createdAt}</div>}
-          </label>
           <label className={cl.label}>
-            <span>Категория</span>
-            <Field name="category" type="text" validate={validateField} />
-            {errors.category && touched.category && <div className={cl.error}>{errors.category}</div>}
+            <span>Стоимость</span>
+
+            <Field name="amount" type="number" validate={validateField} />
+            {errors.amount && touched.amount && <div className={cl.error}>{errors.desc}</div>}
           </label>
-          <label className={cl.label}>
-            <span>сумма операции</span>
-            <Field name="total" type="number" validate={validateField} />
-            {errors.total && touched.total && <div className={cl.error}>{errors.total}</div>}
-          </label>
-          <label className={cl.label}>
-            <span>Описание</span>
-            <Field name="description" type="text" validate={validateField} />
-            {errors.total && touched.total && <div className={cl.error}>{errors.total}</div>}
-          </label>
+
+          <label htmlFor="selectType">Выберите опцию:</label>
+
+           <Field name="selectType" as="select">
+            <option value="Profit">Profit</option>
+            <option value="Cost">Cost</option>
+          </Field>
+
+          <Field name="categoryId" as="select">
+            {categoriesArray.map((category) => {
+              return <option key={category.id} value={category.id}>{category.name}</option>
+            })}
+          </Field>
+
+
+
+
+
+          {/* <select
+            name='categoryIds'
+          value=''>
+            {categoriesArray.map((category) => {
+              return <option key={category.id} value={category.id}>{category.name}</option>
+            })
+            }
+
+        </select> */}
           <button className={cl.button} type="submit">
             save
           </button>
