@@ -1,0 +1,61 @@
+.header{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: 0px 14px 15px 0px rgba(0, 0, 0, 0.53);
+
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logo{
+    height: 40px;
+    width: 40px;
+    display: block;
+    margin-right: 50px;
+    svg{
+        height: 100%;
+        width: 100%;
+    }
+    .eye{
+        fill:#414141
+    }
+    .mouth{
+        fill: #FF6633;
+    }
+    &:hover{
+        .eye{
+            fill: #fc3f00;
+        }
+        .mouth{
+            fill: #af0202;
+        }
+    }
+}
+.logIn{
+    margin-left: auto;
+}
+.navigation{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navItem{
+    display: block;
+    padding: 10px;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 5px;
+    color: #000000;
+    transition: all .3s linear;
+
+    &:hover{
+        background-color: #af0202;
+        color: #FFFFFF;
+        transition: all .3s linear;
+    }
+}

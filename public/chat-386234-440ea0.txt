@@ -1,0 +1,39 @@
+22:02:24	 From Oskar : +
+22:02:25	 From Aleksandr Makarov : ++
+22:02:29	 From Анатолий Т : +
+22:06:57	 From Aleksandr Makarov : хорошо
+22:07:35	 From Aleksandr Makarov : Вопрос, по поводу провайдера, почему импорт чем выше тем лучше?
+22:09:50	 From Aleksandr Makarov : Я не помню проходили ли мы вообще последовательность импортов
+22:10:54	 From Aleksandr Makarov : а, понял
+22:19:21	 From Aleksandr Makarov : а что можно подробнее по поводу isLoading и isSuccess. Что можно применить или просто не стоит их использовать?
+22:20:09	 From Aleksandr Makarov : ааа, все понял, благодарю
+22:32:58	 From Aleksandr Makarov : -
+22:33:08	 From Виталий : -
+22:37:57	 From Aleksandr Makarov : -
+22:43:32	 From Aleksandr Makarov : +
+22:43:32	 From Semyon Pyatkov : +
+22:43:36	 From Anton : +
+22:47:48	 From Anton : +-
+22:47:52	 From Semyon Pyatkov : +
+22:49:04	 From Кирилл Омаров : https://codesandbox.io/p/sandbox/react-query-27kyg5?file=%2Fsrc%2FPosts.tsx%3A12%2C48
+22:49:35	 From Aleksandr Makarov : +
+22:52:21	 From Aleksandr Makarov : чтобы конфликтов не было?
+22:52:52	 From Aleksandr Makarov : +
+22:54:39	 From Aleksandr Makarov : +
+23:01:22	 From Aleksandr Makarov : +
+23:01:27	 From Anton : +
+23:01:27	 From Semyon Pyatkov : +
+23:15:56	 From Aleksandr Makarov : там метод не правильно написан ) putch
+23:17:53	 From Aleksandr Makarov : это в сандбоксе)
+23:18:35	 From Aleksandr Makarov : -
+23:18:49	 From Anton : _
+23:18:53	 From Semyon Pyatkov : -
+23:27:01	 From Aleksandr Makarov : +
+23:33:14	 From Aleksandr Makarov : +
+23:33:17	 From Anton : +
+23:35:27	 From Кирилл Омаров : https://codesandbox.io/p/sandbox/rtk-query-pt6vqp?file=%2Fsrc%2FPosts.tsx
+23:38:46	 From Aleksandr Makarov : ++
+23:38:49	 From Anton : +
+23:39:50	 From Aleksandr Makarov : Это наверно от задачи зависит?
+23:41:47	 From Aleksandr Makarov : Я если честно не работал с редаксом, особо не было практики, я начинал на проекте с mobx
+23:42:36	 From Кирилл Омаров : https://otus.ru/polls/80195/

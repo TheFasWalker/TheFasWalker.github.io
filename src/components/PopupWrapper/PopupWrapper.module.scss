@@ -1,0 +1,33 @@
+.wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: #00000064;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    background-color: #FFFFFF;
+    width: 400px;
+    border-radius: 10px;
+    padding: 0
+}
+.close{
+    background-color: inherit;
+    font-size: 25px;
+    margin-left: auto;
+    display: block;
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    &:hover{
+        background-color: antiquewhite;
+    }
+}
+.content{
+    padding: 10px 20px 20px 20px;
+}

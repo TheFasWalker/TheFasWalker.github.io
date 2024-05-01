@@ -1,68 +1,37 @@
+*{
+     padding: 0;
+     margin: 0;
+     text-decoration: none;
+     list-style-type: none;
+}
+button{
+     cursor: pointer;
+     border: none;
+}
 .container{
-     max-width:1920px;
-     padding-left: 50px;
-     padding-right: 50px;
+     padding-left: 40px;
+     padding-right: 40px;
+     max-width:1640px;
+     margin: 0 auto;
 }
-
-.languageSection{
-     max-width: 100%;
-     display: flex;
-     flex-direction: column;
-     border-radius: 10px;
-     background-color: antiquewhite;
-     padding: 0 25px;
+.content{
+  position: relative;
 }
-.textField{
-     padding-top: 15px;
-     padding-bottom: 15px;
-     text-align: center;
-}
-.textField__author{
-     text-align: center;
-
-}
-.textField__author span{
-     font-style: italic;
-}
-.darck{
-     background-color: #000000;
-     color: #ffffff;
-}
-.wrapper{
-     display: grid;
-     grid-template-columns: repeat(4, 1fr);
-     grid-template-rows: 1fr 1fr;
-     grid-gap: 40px;
-     height: 80vh;
-     .item{
-          box-shadow: 0px 0px 8px 9px rgba(34, 60, 80, 0.2);
-          padding: 10px;
-          border-radius: 20px;
-          height: 100%;
-          width: 100%;
-     }
-
-}
-.header{
-     display: flex;
-     flex-direction: row;
-     justify-content: space-between;
-     padding-top: 25px;
-     padding-bottom: 25px;
-     max-width:100%
-}
-.active{
-     color: #000000;
-     font-weight: 700;
-}
-.errorPage{
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     h1{
-          font-size: 45px;
-          padding-top: 50px;
-          padding-bottom: 50px;
-     }
-
-}
+/* стили для анимации появления/скрытия */
+     .alert-enter {
+     opacity: 0;
+     transform: translateY(-150%);
+   }
+   .alert-enter-active {
+     opacity: 1;
+     transform: translateY(0);
+     transition: opacity 300ms, transform 300ms;
+   }
+   .alert-exit {
+     opacity: 1;
+   }
+   .alert-exit-active {
+     opacity: 0;
+     transform: translateY(150%);
+     transition: opacity 300ms, transform 300ms;
+   }

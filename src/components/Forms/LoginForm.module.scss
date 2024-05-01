@@ -1,0 +1,36 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.label{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 20px;
+    position: relative;
+}
+.button{
+    margin-top: 20px;
+}
+.input{
+    height: 25px;
+    max-width:100%;
+    padding-left: 10px;
+}
+.formType{
+    width: fit-content;
+    padding: 5px 10px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    &:hover{
+        background-color:rgb(3, 120, 3) ;
+        color: #FFFFFF;
+        transition: all .5s linear;
+    }
+}
+.error{
+    color: rgb(246, 6, 6);
+    position: absolute;
+    bottom: -18px;
+}
