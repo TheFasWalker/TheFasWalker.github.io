@@ -2,15 +2,17 @@ import { Field, Form, Formik } from 'formik';
 import React, { FC, ReactEventHandler, useEffect, useState } from 'react';
 import { Button } from '../ui/Button/Button';
 import cl from './LoginForm.module.scss';
-import { fetchData } from 'src/client/fetch';
-import { AuthResult } from 'src/client/types';
 import { generateComandId } from '../helpers/generateComandId';
 import { getCookie, writeCookies } from '../helpers/cookies';
-import { useDispatch } from 'react-redux';
-import { authLogIn } from '../../store/authSlise';
-import { error } from 'console';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { autorisation,registration } from 'src/store/redusers/ActionCreater';
+import { authSlice } from 'src/store/redusers/authSlice';
 
 
+const errorMessages: {[key: string]: string} = {
+  ERR_INCORRECT_EMAIL_OR_PASSWORD: 'Некорректный email или пароль',
+  ERR_ACCOUNT_ALREADY_EXIST: 'Пользователь с таким email уже существует'
+};
 const loginData = {
   'login': 'test42@test42.test',
   'password': 'qwerasdf1'
@@ -23,7 +25,16 @@ type loginFormProps = {
 
 export const LoginForm: FC<loginFormProps> = ({ close }) => {
   const [loginType, setLoginType] = useState(false);
-  const dispatch = useDispatch();
+
+  const{error:authError,isLoading:authLoading,token}= useAppSelector(state=>state.authReduser)
+  const dispatch = useAppDispatch();
+
+  const changeFormType = () => {
+    setLoginType(!loginType);
+    dispatch(authSlice.actions.authCleanErrors())
+
+}
+
 
   function validateField(value: string) {
     // if (!value) {
@@ -32,47 +43,20 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
   }
 
 
-  const registration = (email: string, password: string) => {
+  const registrationFunc = (email: string, password: string) => {
     const commandId = generateComandId(15);
-    const data = {
-      email: email,
-      password: password,
-      commandId: commandId,
-    };
-    console.log(data);
-    console.log('registration');
-    // fetchData<AuthResult>('/signup', {
-    //   method: 'POST',
-    //   headers:{
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body:JSON.stringify(data)
-    // }).then((res) => {
-    //   console.log(res.token)
-    //   writeCookies('LoginToken', res.token)
 
-    // }).catch(e=>console.log(e))
+    dispatch(registration(email,password,commandId))
     writeCookies('LoginToken', generateComandId(15));
   };
 
   const logIn = (email: string, password: string) => {
-    const data = {
-      email: email,
-      password: password,
-    };
-    fetchData<AuthResult>('/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body:JSON.stringify(data)
-    }).then((res) => {
-      console.log('good')
-      console.log(res)
-      // writeCookies('LoginToken', res.token)
-      // dispatch(authLogIn(getCookie('LoginToken')));
-      // close()
-    }).catch(e=>console.log(e))
+    dispatch(autorisation(email, password))
+
+    if (authError) {
+      writeCookies('LoginToken', token);
+      close()
+    }
 
 
 
@@ -87,17 +71,17 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
       onSubmit={(values) => {
 
         if (loginType) {
-          registration(values.userName, values.password);
+          registrationFunc(values.userName, values.password);
         } else {
-          // logIn(values.userName, values.password);
-          logIn(loginData.login,loginData.password)
+          logIn(values.userName, values.password);
+          // logIn(loginData.login, loginData.password)
         }
       }}
     >
       {({ errors, touched }) => (
         <Form className={cl.form}>
           <h2>Форма {loginType ? 'регистрации' : 'входа'}</h2>
-
+          {authError && <span >{errorMessages[authError] ? errorMessages[authError] : 'Неизвестная ошибка'}</span>}
           <label className={cl.label}>
             <span>Почта для {loginType ? 'регистрации' : 'входа'}</span>
             <Field
@@ -126,7 +110,7 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
             {loginType ? 'зарегистрироваться' : 'Войти'}
           </Button>
 
-          <button className={cl.formType} onClick={() => setLoginType(!loginType)} type="button">
+          <button className={cl.formType} onClick={() =>changeFormType() } type="button">
             {loginType ? 'Войти' : 'зарегистрироваться'}
           </button>
         </Form>

@@ -5,28 +5,33 @@ import cn from 'classnames';
 import { PopupWrapper } from '../PopupWrapper/PopupWrapper';
 import { LoginForm } from '../Forms/LoginForm';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {RootState} from 'src/store'
 import { getCookie, writeCookies } from '../helpers/cookies';
-import {authLogIn, authLogOut} from '../../store/authSlise'
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { authSlice } from 'src/store/redusers/authSlice';
+
 
 
 
 export const Header = () => {
-  const dispatch = useDispatch()
-  const authState = useSelector((state:RootState)=>state.auth.autorisationToken)
+  const dispatch = useAppDispatch()
+
 
   const [popupState, setPopupState] = useState(false);
+  const authState = useAppSelector(state=>state.authReduser.token)
 
+  const closePopupForm=() => {
+    setPopupState(!popupState)
+    dispatch(authSlice.actions.authCleanErrors())
+  }
 
-  const logOut=() => {
-    dispatch(authLogOut())
+  const logOut = () => {
+    dispatch(authSlice.actions.authLogOut())
     writeCookies('LoginToken','')
   }
 
   useEffect(() => {
     if (getCookie('LoginToken')) {
-      dispatch(authLogIn(getCookie('LoginToken')))
+      dispatch(authSlice.actions.authWithCookies(getCookie('LoginToken')))
     }
   }, [])
   return (
@@ -79,8 +84,8 @@ LogIn
         </div>
       </header>
 
-      <PopupWrapper close={() => setPopupState(!popupState)} visible={popupState}>
-            <LoginForm close={()=>setPopupState(!popupState)}/>
+      <PopupWrapper close={() =>closePopupForm() } visible={popupState}>
+            <LoginForm close={()=>closePopupForm()}/>
       </PopupWrapper>
     </>
   );

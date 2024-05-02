@@ -1,13 +1,16 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
+
 import { Navigate, Outlet } from "react-router-dom";
-import { RootState } from "src/store";
+import { useAppSelector } from "src/hooks/redux";
+
 
 
 
 
 export const PretectedRoutes: FC = () => {
-    const authState = useSelector((state: RootState) => state.auth.autorisationToken)
+
+    const authState = useAppSelector(state=>state.authReduser.token)
 
     return !authState ? <Navigate to="/" replace /> : <Outlet/>
+
 }
