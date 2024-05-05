@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { stat } from "fs";
 import { ServerErrors } from "src/models/ServerErrors";
 
 interface authState {
@@ -22,7 +21,7 @@ export const authSlice = createSlice({
         authWithCookies(state, action: PayloadAction<string>) {
           state.token=action.payload
         },
-        authLogOut(state, ) {
+        authLogOut(state) {
           state.token = ''
         },
         auth(state) {
@@ -35,7 +34,6 @@ export const authSlice = createSlice({
         authError(state, action: PayloadAction<ServerErrors>) {
             state.isLoading = false;
             state.error = action.payload.errors[0].extensions.code
-            console.log('printError from slice = '+state.error)
         },
         authCleanErrors(state) {
             state.error=''

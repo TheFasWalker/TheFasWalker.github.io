@@ -1,18 +1,17 @@
 export interface IOperation {
-    data: Datum[];
-    sorting: Sorting;
-    pagination: Pagination;
+    data:Operation[];
+    pagination: {
+      pageSize: number;
+      pageNumber: number;
+      total: number;
+    };
+    sorting: {
+      type: 'ASC' | 'DESC';
+      field: 'id' | 'createdAt' | 'updatedAt' | 'name';
+    }
   }
-  interface Pagination {
-    pageSize: number;
-    pageNumber: number;
-    total: number;
-  }
-  interface Sorting {
-    type: string;
-    field: string;
-  }
-  interface Datum {
+
+  export interface Operation {
     id: string;
     name: string;
     desc?: string;
@@ -23,10 +22,19 @@ export interface IOperation {
     amount: number;
     category?: Category;
   }
-  interface Category {
+  type Category = {
     id: string;
     name: string;
     createdAt: string;
     updatedAt: string;
     photo?: string;
+  }
+
+  export interface OperationCreate {
+    name: string;
+    desc?: string;
+    amount: number;
+    date: string; // дата в виде строки new Date().toISOString() 2023-09-19T10:37:16.389+00:00
+    type: string;
+    categoryId: string;
   }

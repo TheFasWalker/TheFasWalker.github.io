@@ -1,6 +1,9 @@
 .form{
     display: flex;
     flex-direction: column;
+    button{
+        margin-top: 20px;
+    }
 }
 .label{
     display: flex;
@@ -33,4 +36,32 @@
     color: rgb(246, 6, 6);
     position: absolute;
     bottom: -18px;
+}
+.noCategpriesError{
+    text-align: center;
+    button{
+        margin-top: 20px;
+    }
+}
+
+.editCategoryForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    height: 55px;
+    input{
+        height: 100%;
+        padding-left: 10px;
+    }
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 20px;
+}
+.buttonsFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

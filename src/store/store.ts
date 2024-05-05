@@ -1,10 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import operationsReduser from './redusers/operationsSlice'
-import authReduser from './redusers/authSlice'
-
+import operationsReduser from './redusers/operationsSlice';
+import authReduser from './redusers/authSlice';
+import profileReduser from './redusers/userDataSlice';
+import categoryReduser from './redusers/categoriesSlice'
 const rootReduser = combineReducers({
     operationsReduser,
-    authReduser
+    authReduser,
+    profileReduser,
+    categoryReduser
 })
 
 export const setupStore = () => {

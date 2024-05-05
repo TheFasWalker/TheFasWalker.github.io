@@ -33,6 +33,9 @@ export const Header = () => {
     if (getCookie('LoginToken')) {
       dispatch(authSlice.actions.authWithCookies(getCookie('LoginToken')))
     }
+    if (authState != '') {
+      writeCookies('LoginToken',authState)
+    }
   }, [])
   return (
     <>

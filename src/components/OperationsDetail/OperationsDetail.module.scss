@@ -1,0 +1,19 @@
+.operation{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.operationSection{
+    display: flex;
+    flex-direction: column;
+}
+.operationSectionDate{
+display: flex;
+flex-direction: row;
+grid-gap: 10px;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}

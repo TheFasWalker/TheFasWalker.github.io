@@ -3,7 +3,6 @@ import React, { FC, ReactEventHandler, useEffect, useState } from 'react';
 import { Button } from '../ui/Button/Button';
 import cl from './LoginForm.module.scss';
 import { generateComandId } from '../helpers/generateComandId';
-import { getCookie, writeCookies } from '../helpers/cookies';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { autorisation,registration } from 'src/store/redusers/ActionCreater';
 import { authSlice } from 'src/store/redusers/authSlice';
@@ -15,7 +14,7 @@ const errorMessages: {[key: string]: string} = {
 };
 const loginData = {
   'login': 'test42@test42.test',
-  'password': 'qwerasdf1'
+  'password': 'qwerasdf'
 }
 
 
@@ -25,7 +24,6 @@ type loginFormProps = {
 
 export const LoginForm: FC<loginFormProps> = ({ close }) => {
   const [loginType, setLoginType] = useState(false);
-
   const{error:authError,isLoading:authLoading,token}= useAppSelector(state=>state.authReduser)
   const dispatch = useAppDispatch();
 
@@ -37,29 +35,22 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
 
 
   function validateField(value: string) {
-    // if (!value) {
-    //   return 'Заполните поле';
-    // }
+    if (!value) {
+      return 'Заполните поле';
+    }
   }
 
 
   const registrationFunc = (email: string, password: string) => {
     const commandId = generateComandId(15);
-
     dispatch(registration(email,password,commandId))
-    writeCookies('LoginToken', generateComandId(15));
   };
 
   const logIn = (email: string, password: string) => {
     dispatch(autorisation(email, password))
-
-    if (authError) {
-      writeCookies('LoginToken', token);
+    if (!authError) {
       close()
     }
-
-
-
   };
 
   return (
@@ -73,8 +64,8 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
         if (loginType) {
           registrationFunc(values.userName, values.password);
         } else {
-          logIn(values.userName, values.password);
-          // logIn(loginData.login, loginData.password)
+          // logIn(values.userName, values.password);
+          logIn(loginData.login, loginData.password)
         }
       }}
     >

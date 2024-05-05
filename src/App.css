@@ -3,6 +3,7 @@
      margin: 0;
      text-decoration: none;
      list-style-type: none;
+     transition: all .3s linear;
 }
 button{
      cursor: pointer;
@@ -16,6 +17,73 @@ button{
 }
 .content{
   position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.catalogHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.catalogSorting{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.profile-content{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  padding-top: 30px;
+}
+.profile-data{
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+.operationContent{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px 20px;
+}
+.categoriesList{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  padding-top: 10px;
+}
+.noOperations{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 25px;
+}
+.profile-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.profile-head{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.errorContainer{
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+
+  justify-content: center;
+
+}
+.errorContainer img{
+  max-width: 500px;
+  height: auto;
 }
 /* стили для анимации появления/скрытия */
      .alert-enter {
