@@ -4,6 +4,7 @@ import cl from './LoginForm.module.scss';
 import { Button } from '../ui/Button/Button';
 import { useAppDispatch } from 'src/hooks/redux';
 import { createCategorie } from 'src/store/redusers/ActionCreater';
+import { validateField } from './helpers/validation';
 
 
 type createCategoryProps = {
@@ -12,11 +13,6 @@ type createCategoryProps = {
 }
 export const CreateCategoryForm:FC<createCategoryProps> = ({close,token}) => {
     const dispatch = useAppDispatch()
-    const validateField = (value: string) => {
-        if (!value) {
-            return 'required';
-        }
-    }
         return (
             <Formik
                 initialValues={{

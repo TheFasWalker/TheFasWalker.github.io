@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from 'src/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { deleteOperationById, fetchOperations } from 'src/store/redusers/ActionCreater';
-import cn from 'classnames';
 import { ButtonSorting } from 'src/components/ui/Button/ButtonSorting';
-import { getCookie } from 'src/components/helpers/cookies';
 import { Button } from 'src/components/ui/Button/Button';
 import { OperationPreview } from 'src/components/OperationPreview/OperationPreview';
 import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
@@ -16,9 +14,11 @@ export const CatalogPage = () => {
   const { error, isLoading,operations } = useAppSelector((state) => state.operationsReduser);
   const token = useAppSelector(selectMemoizedAutorizationState)
   const [ctreateOperationPopuState, setCtreateOperationPopuState] = useState(false)
+
   useEffect(() => {
     dispatch(fetchOperations(token));
   }, []);
+
 
   useEffect(() => {
     dispatch(fetchOperations(token));

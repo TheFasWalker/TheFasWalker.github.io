@@ -6,15 +6,21 @@ import { generateComandId } from '../helpers/generateComandId';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { autorisation,registration } from 'src/store/redusers/ActionCreater';
 import { authSlice } from 'src/store/redusers/authSlice';
+import { validateField } from './helpers/validation';
 
 
 const errorMessages: {[key: string]: string} = {
   ERR_INCORRECT_EMAIL_OR_PASSWORD: 'Некорректный email или пароль',
-  ERR_ACCOUNT_ALREADY_EXIST: 'Пользователь с таким email уже существует'
+  ERR_ACCOUNT_ALREADY_EXIST: 'Пользователь с таким email уже существует',
+  ERR_VALIDATION_ERROR:'Некорректный пароль или email'
 };
 const loginData = {
   'login': 'test42@test42.test',
   'password': 'qwerasdf'
+}
+const loginData2 = {
+  'login': 'test42@test422.test',
+  'password': 'test42@test422.test'
 }
 
 
@@ -32,15 +38,6 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
     dispatch(authSlice.actions.authCleanErrors())
 
 }
-
-
-  function validateField(value: string) {
-    if (!value) {
-      return 'Заполните поле';
-    }
-  }
-
-
   const registrationFunc = (email: string, password: string) => {
     const commandId = generateComandId(15);
     dispatch(registration(email,password,commandId))

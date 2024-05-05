@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import cl from './OperationsDetail.module.scss';
 import { PopupWrapper } from '../PopupWrapper/PopupWrapper';
-import { ButtonExit } from '../ui/Button/ButtonExit';
 import { EditButton } from '../ui/Button/EditButton';
 import { DeleteButton } from '../ui/Button/DeleteButton';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { spawn } from 'child_process';
+import { useAppSelector } from 'src/hooks/redux';
+
 import { EditOperation } from '../Forms/EditOperation';
-import { getCategories } from 'src/store/redusers/ActionCreater';
+
 
 type operationDetailsProps = {
   id: string;

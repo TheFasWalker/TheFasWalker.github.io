@@ -131,6 +131,7 @@ export const registration = (email:string, password:string, commandId:string) =>
 
     } catch (e) {
         dispatch(authSlice.actions.authError(e))
+        console.log(e.message)
     }
 }
 export const userData = (token: string) => async(dispatch: AppDispatch) => {

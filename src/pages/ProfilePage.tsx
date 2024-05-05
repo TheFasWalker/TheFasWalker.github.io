@@ -9,7 +9,7 @@ import { Button } from "src/components/ui/Button/Button";
 import { EditButton } from "src/components/ui/Button/EditButton";
 import { useAppDispatch, useAppSelector } from "src/hooks/redux";
 import { selectMemoizedCategoryState } from "src/store/memo/selectMemoizedCategoryState";
-import { autorisation, deleteCategory, getCategories, userData } from "src/store/redusers/ActionCreater";
+import { deleteCategory, getCategories, userData } from "src/store/redusers/ActionCreater";
 
 
 export const ProfilePage = () => {

@@ -2,10 +2,10 @@ import { Field, Form, Formik } from 'formik';
 import React, { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { crateOperation, getCategories } from 'src/store/redusers/ActionCreater';
-import { Loader } from '../Loader/Loader';
 import cl from './LoginForm.module.scss';
 import { Button } from '../ui/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { validateField } from './helpers/validation';
 
 type CreateOperationForm = {
   token: string;
@@ -25,11 +25,7 @@ export const CreateOperationForm: FC<CreateOperationForm> = ({ token, closeFunc 
 		navigate('/profile?popup=true')
 	}
 
-	const validateField=(value: string)=> {
-    if (!value) {
-      return 'required';
-    }
-  }
+
 	useEffect(() => {
 		dispatch(getCategories(token));
 	}, []);
