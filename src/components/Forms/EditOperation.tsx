@@ -4,23 +4,21 @@ import { Field, Form, Formik } from 'formik';
 import { validateField } from './helpers/validation';
 import { ButtonSubmit } from '../ui/Button/ButtonSubmit';
 import { ButtonExit } from '../ui/Button/ButtonExit';
-import { IOperation, Operation } from 'src/models/IOperation';
+import { Operation } from 'src/models/IOperation';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { editOperaton, getCategories } from 'src/store/redusers/ActionCreater';
 
-
-
 type editOperationProps = {
-  closeEdition: () => void,
-  operation:Operation
-}
+  closeEdition: () => void;
+  operation: Operation;
+};
 export const EditOperation: FC<editOperationProps> = ({ closeEdition, operation }) => {
-  const dispatch = useAppDispatch()
-  const token =useAppSelector(state=>state.authReduser.token)
-  const { data:categories } = useAppSelector((state) => state.categoryReduser)
+  const dispatch = useAppDispatch();
+  const token = useAppSelector((state) => state.authReduser.token);
+  const { data: categories } = useAppSelector((state) => state.categoryReduser);
   useEffect(() => {
-    dispatch(getCategories(token))
-  },[])
+    dispatch(getCategories(token));
+  });
   return (
     <>
       <Formik
@@ -31,20 +29,19 @@ export const EditOperation: FC<editOperationProps> = ({ closeEdition, operation 
           type: `${operation.type}`,
           categoryId: `${operation.category.id}`,
         }}
-
         onSubmit={(values) => {
-          const date = new Date().toISOString()
+          const date = new Date().toISOString();
           const data = {
             name: values.name,
             desc: values.desc,
             amount: Number(values.amount),
             type: values.type,
             categoryId: values.categoryId,
-            date:date
+            date: date,
           };
 
-          dispatch(editOperaton(token, operation.id, data))
-          closeEdition()
+          dispatch(editOperaton(token, operation.id, data));
+          closeEdition();
         }}
       >
         {({ errors, touched }) => (
@@ -83,18 +80,18 @@ export const EditOperation: FC<editOperationProps> = ({ closeEdition, operation 
             <label className={cl.label}>
               <span>Категория операции</span>
               <Field name="categoryId" as="select" validate={validateField}>
-              {categories.data.map((categoty) => (
-										<option key={categoty.id} value={categoty.id}>{categoty.name}</option>
-									))}
-
+                {categories.data.map((categoty) => (
+                  <option key={categoty.id} value={categoty.id}>
+                    {categoty.name}
+                  </option>
+                ))}
               </Field>
               {errors.categoryId && touched.categoryId && <div className={cl.error}>{errors.categoryId}</div>}
             </label>
             <div className={cl.buttonsFooter}>
               <ButtonSubmit />
-              <ButtonExit type='button' onClick={() => closeEdition()} />
+              <ButtonExit type="button" onClick={() => closeEdition()} />
             </div>
-
           </Form>
         )}
       </Formik>

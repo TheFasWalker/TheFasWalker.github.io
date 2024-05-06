@@ -1,10 +1,6 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
+const autorizationErrorState = (state: RootState) => state.authReduser.error;
 
-const autorizationErrorState = (state: RootState) => state.authReduser.error
-
-export const selectMemiozerAutorizationError = createSelector(
-    autorizationErrorState,
-    (error)=>error
-)
+export const selectMemiozerAutorizationError = createSelector(autorizationErrorState, (error) => error);

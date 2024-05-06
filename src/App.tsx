@@ -5,18 +5,13 @@ import { Navigation } from './navigation/Navigation';
 import { setupStore } from './store/store';
 // import { store } from './store';
 
-
-const store = setupStore()
-
+const store = setupStore();
 
 function App() {
-
-
-
   return (
-      <Provider store={store}>
-        <Navigation />
-      </Provider>
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
   );
 }
 

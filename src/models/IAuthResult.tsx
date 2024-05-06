@@ -1,3 +1,3 @@
-export interface AuthResult{
-    token: string;
-  };
+export interface AuthResult {
+  token: string;
+}

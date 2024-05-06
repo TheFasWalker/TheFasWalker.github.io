@@ -18,9 +18,7 @@ export const Navigation: FC = () => {
 
           <Route element={<PretectedRoutes />}>
             <Route path="/profile" element={<ProfilePage />} />
-
           </Route>
-
         </Route>
       </Routes>
     </BrowserRouter>

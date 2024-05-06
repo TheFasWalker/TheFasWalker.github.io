@@ -9,36 +9,30 @@ import { getCookie, writeCookies } from '../helpers/cookies';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { authSlice } from 'src/store/redusers/authSlice';
 
-
-
-
 export const Header = () => {
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
 
   const [popupState, setPopupState] = useState(false);
-  const authState = useAppSelector(state=>state.authReduser.token)
+  const authState = useAppSelector((state) => state.authReduser.token);
 
-
-
-  const closePopupForm=() => {
-    setPopupState(!popupState)
-    dispatch(authSlice.actions.authCleanErrors())
-  }
+  const closePopupForm = () => {
+    setPopupState(!popupState);
+    dispatch(authSlice.actions.authCleanErrors());
+  };
 
   const logOut = () => {
-    dispatch(authSlice.actions.authLogOut())
-    writeCookies('LoginToken','')
-  }
+    dispatch(authSlice.actions.authLogOut());
+    writeCookies('LoginToken', '');
+  };
 
   useEffect(() => {
     if (getCookie('LoginToken')) {
-      dispatch(authSlice.actions.authWithCookies(getCookie('LoginToken')))
+      dispatch(authSlice.actions.authWithCookies(getCookie('LoginToken')));
     }
     if (authState != '') {
-      writeCookies('LoginToken',authState)
+      writeCookies('LoginToken', authState);
     }
-  }, [])
+  }, []);
   return (
     <>
       <header className={cl.header}>
@@ -65,32 +59,31 @@ export const Header = () => {
           </NavLink>
           <nav className={cl.navigation}>
             <NavLink className={cl.navItem} to="/catalog">
-                Каталог
+              Каталог
             </NavLink>
-            {!authState ||
-            <NavLink className={cl.navItem} to="/profile">
-              профиль
-            </NavLink>
-              }
+            {!authState || (
+              <NavLink className={cl.navItem} to="/profile">
+                профиль
+              </NavLink>
+            )}
             <NavLink className={cl.navItem} to="/profileasd">
-                error page
+              error page
             </NavLink>
           </nav>
-          {!authState ?
-                      <Button onClick={() => setPopupState(!popupState)} elementClass={cl.logIn}>
-LogIn
+          {!authState ? (
+            <Button onClick={() => setPopupState(!popupState)} elementClass={cl.logIn}>
+              LogIn
             </Button>
-            :
-            <Button onClick={()=>logOut()} elementClass={cl.logIn}>
-            LogOut
-  </Button>
-          }
-
+          ) : (
+            <Button onClick={() => logOut()} elementClass={cl.logIn}>
+              LogOut
+            </Button>
+          )}
         </div>
       </header>
 
-      <PopupWrapper close={() =>closePopupForm() } visible={popupState}>
-            <LoginForm close={()=>closePopupForm()}/>
+      <PopupWrapper close={() => closePopupForm()} visible={popupState}>
+        <LoginForm close={() => closePopupForm()} />
       </PopupWrapper>
     </>
   );

@@ -11,18 +11,17 @@ import { CreateOperationForm } from 'src/components/Forms/CreateOperationForm';
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();
-  const { error, isLoading,operations } = useAppSelector((state) => state.operationsReduser);
-  const token = useAppSelector(selectMemoizedAutorizationState)
-  const [ctreateOperationPopuState, setCtreateOperationPopuState] = useState(false)
+  const { error, isLoading, operations } = useAppSelector((state) => state.operationsReduser);
+  const token = useAppSelector(selectMemoizedAutorizationState);
+  const [ctreateOperationPopuState, setCtreateOperationPopuState] = useState(false);
 
   useEffect(() => {
     dispatch(fetchOperations(token));
   }, []);
 
-
   useEffect(() => {
     dispatch(fetchOperations(token));
-  },[token])
+  }, [dispatch, token]);
 
   return (
     <>
@@ -30,21 +29,17 @@ export const CatalogPage = () => {
         <header className="catalogHeader">
           <h1>catalog page</h1>
           <div className="catalogSorting">
-            {token!='' ?
-            <Button
-            onClick={()=>setCtreateOperationPopuState(!ctreateOperationPopuState)}>
-              Create Operation
-              </Button>
-              :
-              null}
+            {token != '' ? (
+              <Button onClick={() => setCtreateOperationPopuState(!ctreateOperationPopuState)}>Create Operation</Button>
+            ) : null}
             <ButtonSorting
-              onClickEvent={() => console.log(operations.data)}
+              onClickEvent={() => console.log('sss')}
               // activity={true}
             >
               get data
             </ButtonSorting>
             <ButtonSorting
-              onClickEvent={() => console.log(token)}
+              onClickEvent={() => console.log('token')}
               // activity={true}
             >
               sorting type 2
@@ -54,13 +49,15 @@ export const CatalogPage = () => {
         <div className="content operationContent">
           {isLoading && <Loader />}
           {error && <span>Ошибка загрузки данных</span>}
-          {operations.data.length == 0
-            ?
+          {operations.data.length == 0 ? (
             <div className="noOperations">
               <h2>у вас еще нет операций</h2>
-<Button onClick={()=>setCtreateOperationPopuState(!ctreateOperationPopuState)}>Создать операцию?</Button>
-          </div>
-            : <>
+              <Button onClick={() => setCtreateOperationPopuState(!ctreateOperationPopuState)}>
+                Создать операцию?
+              </Button>
+            </div>
+          ) : (
+            <>
               {operations.data.map((operation) => (
                 <OperationPreview
                   key={operation.id}
@@ -68,22 +65,19 @@ export const CatalogPage = () => {
                   desc={operation.desc}
                   amount={operation.amount}
                   id={operation.id}
-                  deleteFunc={() => dispatch(deleteOperationById(token, operation.id))} />
-
-              ))}</>
-          }
-
-
+                  deleteFunc={() => dispatch(deleteOperationById(token, operation.id))}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
       <PopupWrapper
         visible={ctreateOperationPopuState}
-      close={()=>setCtreateOperationPopuState(!ctreateOperationPopuState)}>
-        <CreateOperationForm
-          token={token}
-          closeFunc={()=>setCtreateOperationPopuState(!ctreateOperationPopuState)}
-        />
-          </PopupWrapper>
+        close={() => setCtreateOperationPopuState(!ctreateOperationPopuState)}
+      >
+        <CreateOperationForm token={token} closeFunc={() => setCtreateOperationPopuState(!ctreateOperationPopuState)} />
+      </PopupWrapper>
     </>
   );
 };

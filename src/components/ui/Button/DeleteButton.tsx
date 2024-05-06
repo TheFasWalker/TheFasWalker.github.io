@@ -7,7 +7,7 @@ type buttonProps = {
 
 export const DeleteButton: FC<buttonProps> = ({ onClick }) => {
   return (
-    <button onClick={onClick} className={cl.deleteButton} title='delete'>
+    <button onClick={onClick} className={cl.deleteButton} title="delete">
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"

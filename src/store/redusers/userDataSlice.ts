@@ -1,5 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { ServerErrors } from 'src/models/ServerErrors';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 type Profile = {
   id: string;
@@ -9,22 +10,22 @@ type Profile = {
 };
 
 interface profileState {
-    profile: {
-        id: string;
-        name: string;
-        email: string;
-        signUpDate: Date;
-    };
+  profile: {
+    id: string;
+    name: string;
+    email: string;
+    signUpDate: Date;
+  };
   isLoading: boolean;
   error: string;
 }
 const initialState: profileState = {
-    profile: {
-        id: '',
-        name: '',
-        email: '',
-        signUpDate:null
-    },
+  profile: {
+    id: '',
+    name: '',
+    email: '',
+    signUpDate: null,
+  },
   isLoading: false,
   error: '',
 };
@@ -36,7 +37,7 @@ export const profileSlice = createSlice({
     profileStartLoading(state) {
       state.isLoading = true;
     },
-    profileSuccess(state, action:PayloadAction<Profile>) {
+    profileSuccess(state, action: PayloadAction<Profile>) {
       state.isLoading = false;
       state.error = '';
       state.profile = action.payload;

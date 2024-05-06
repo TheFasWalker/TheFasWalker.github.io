@@ -1,6 +1,5 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import cl from './Button.module.scss';
-import React from 'react';
 import cn from 'classnames';
 
 type SortingButtonProps = {

@@ -1,5 +1,5 @@
-export const validateField=(value: string)=> {
-    if (!value) {
-      // return 'required';
-    }
+export const validateField = (value: string) => {
+  if (!value) {
+    return 'required';
   }
+};

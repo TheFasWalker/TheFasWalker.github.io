@@ -1,5 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { IOperation, Operation } from 'src/models/IOperation';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface OperationsState {
   operations: IOperation;
@@ -40,24 +41,24 @@ export const operationsSlice = createSlice({
       state.error = action.payload;
     },
     operationsDeleteOperationById(state, action: PayloadAction<string>) {
-      state.operations.data = state.operations.data.filter((operation) => operation.id !== action.payload)
+      state.operations.data = state.operations.data.filter((operation) => operation.id !== action.payload);
       state.isLoading = false;
     },
     operationCreating(state, action: PayloadAction<Operation>) {
       state.isLoading = false;
-      state.operations.data.push(action.payload)
+      state.operations.data.push(action.payload);
     },
     operationEdit(state, action) {
       state.isLoading = false;
-      let editingElementIndex
+      let editingElementIndex;
       state.operations.data.forEach((elem, index) => {
         if (elem.id == action.payload.id) {
-          return(editingElementIndex = index)
+          return (editingElementIndex = index);
         }
-      })
-      state.operations.data = state.operations.data.filter((elem) => elem.id !== action.payload.id)
-      state.operations.data.splice(editingElementIndex,0,action.payload)
-    }
+      });
+      state.operations.data = state.operations.data.filter((elem) => elem.id !== action.payload.id);
+      state.operations.data.splice(editingElementIndex, 0, action.payload);
+    },
   },
 });
 export default operationsSlice.reducer;

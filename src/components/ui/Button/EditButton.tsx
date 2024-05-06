@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import cl from './Button.module.scss'
+import cl from './Button.module.scss';
 
 type EditBtn = {
   onClick: () => void;
 };
 export const EditButton: FC<EditBtn> = ({ onClick }) => {
   return (
-    <button className={cl.editButton} onClick={onClick} title='edit'>
+    <button className={cl.editButton} onClick={onClick} title="edit">
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
