@@ -87,7 +87,7 @@ export const editOperaton = (token: string,id:string, data: OperationCreate) => 
 }
 
 
-export const autorisation = (email:string, password:string, commandId?:string) => async (dispatch: AppDispatch) => {
+export const autorisation = (email:string, password:string, commandId?:string,) => async (dispatch: AppDispatch) => {
     try {
         dispatch(authSlice.actions.auth())
         const data = {
@@ -106,6 +106,7 @@ export const autorisation = (email:string, password:string, commandId?:string) =
         dispatch(authSlice.actions.authSuccess((await response).token))
         writeCookies('LoginToken', (await response).token)
 
+
     } catch (e) {
         dispatch(authSlice.actions.authError(e))
     }
@@ -118,7 +119,6 @@ export const registration = (email:string, password:string, commandId:string) =>
             password: password,
             commandId:commandId
         }
-
         const response = fetchData<AuthResult>('/signup', {
             method: 'POST',
             headers: {
@@ -131,7 +131,6 @@ export const registration = (email:string, password:string, commandId:string) =>
 
     } catch (e) {
         dispatch(authSlice.actions.authError(e))
-        console.log(e.message)
     }
 }
 export const userData = (token: string) => async(dispatch: AppDispatch) => {

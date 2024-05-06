@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { autorisation,registration } from 'src/store/redusers/ActionCreater';
 import { authSlice } from 'src/store/redusers/authSlice';
 import { validateField } from './helpers/validation';
+import { Loader } from '../Loader/Loader';
+import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
 
 
 const errorMessages: {[key: string]: string} = {
@@ -32,10 +34,9 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
   const [loginType, setLoginType] = useState(false);
   const{error:authError,isLoading:authLoading,token}= useAppSelector(state=>state.authReduser)
   const dispatch = useAppDispatch();
-
+  const tokenData = useAppSelector(selectMemoizedAutorizationState)
   const changeFormType = () => {
     setLoginType(!loginType);
-    dispatch(authSlice.actions.authCleanErrors())
 
 }
   const registrationFunc = (email: string, password: string) => {
@@ -45,13 +46,19 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
 
   const logIn = (email: string, password: string) => {
     dispatch(autorisation(email, password))
-    if (!authError) {
+
+  };
+  useEffect(() => {
+    if (tokenData != '') {
       close()
     }
-  };
+  },[tokenData])
 
   return (
-    <Formik
+    <>
+      {authLoading && <Loader />}
+      <button onClick={()=>console.log(authError)}>authError</button>
+        <Formik
       initialValues={{
         userName: '',
         password: '',
@@ -61,8 +68,8 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
         if (loginType) {
           registrationFunc(values.userName, values.password);
         } else {
-          // logIn(values.userName, values.password);
-          logIn(loginData.login, loginData.password)
+          logIn(values.userName, values.password);
+          // logIn(loginData.login, loginData.password)
         }
       }}
     >
@@ -104,5 +111,6 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
         </Form>
       )}
     </Formik>
+    </>
   );
 };

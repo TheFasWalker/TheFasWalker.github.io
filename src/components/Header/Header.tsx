@@ -19,6 +19,8 @@ export const Header = () => {
   const [popupState, setPopupState] = useState(false);
   const authState = useAppSelector(state=>state.authReduser.token)
 
+
+
   const closePopupForm=() => {
     setPopupState(!popupState)
     dispatch(authSlice.actions.authCleanErrors())
