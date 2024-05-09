@@ -43,6 +43,7 @@ export const profileSlice = createSlice({
       state.profile = action.payload;
     },
     profileError(state, action: PayloadAction<ServerErrors>) {
+      state.isLoading = false;
       state.error = action.payload.errors[0].extensions.code;
     },
   },

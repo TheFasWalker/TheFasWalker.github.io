@@ -2,10 +2,12 @@ import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CreateCategoryForm } from 'src/components/Forms/CreateCategoryForm';
+import { UserDaraEdit } from 'src/components/Forms/UserDataEdit';
 import { Loader } from 'src/components/Loader/Loader';
 import { PopupWrapper } from 'src/components/PopupWrapper/PopupWrapper';
 import { CategoryPreview } from 'src/components/categoriesPrevies/CategoryPreview';
 import { Button } from 'src/components/ui/Button/Button';
+import { ButtonExit } from 'src/components/ui/Button/ButtonExit';
 import { EditButton } from 'src/components/ui/Button/EditButton';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { selectMemoizedCategoryState } from 'src/store/memo/selectMemoizedCategoryState';
@@ -19,7 +21,7 @@ export const ProfilePage = () => {
   const data = useAppSelector(selectMemoizedCategoryState);
   const location = useLocation();
   const params = queryString.parse(location.search);
-
+  const [userProfileEditor, setUserProfileEditor] = useState<boolean>(false);
   const [creatingCategoryPopup, setCreatingCategoryPopup] = useState<boolean>(false);
   const openPopupWithDataFromURL = () => {
     if (params.popup === 'true') {
@@ -31,7 +33,9 @@ export const ProfilePage = () => {
     dispatch(getCategories(token));
     openPopupWithDataFromURL();
   }, []);
-
+  useEffect(() => {
+    setUserProfileEditor(false)
+},[profile])
   return (
     <>
       <PopupWrapper visible={creatingCategoryPopup} close={() => setCreatingCategoryPopup(!creatingCategoryPopup)}>
@@ -45,17 +49,24 @@ export const ProfilePage = () => {
           <div className="profile-row">
             <div className="profile-head">
               <h2>Данные</h2>
-              <EditButton onClick={() => console.log('edit data')} />
+              {!userProfileEditor && <EditButton onClick={() => setUserProfileEditor(true)} />}
+              {userProfileEditor && <ButtonExit onClick={() => setUserProfileEditor(false)} />}
             </div>
-
-            <div className="profile-data">
-              <span>email:</span>
-              <span>{profile.email}</span>
-            </div>
-            <div className="profile-data">
-              <span>name:</span>
-              <span>{profile.name ? profile.name : 'отсутствует'}</span>
-            </div>
+            {!userProfileEditor && (
+              <>
+                <div className="profile-data">
+                  <span>email:</span>
+                  <span>{profile.email}</span>
+                </div>
+                <div className="profile-data">
+                  <span>name:</span>
+                  <span>{profile.name ? profile.name : 'отсутствует'}</span>
+                </div>
+              </>
+            )}
+            {userProfileEditor && <UserDaraEdit
+              profileData={profile}
+            close={()=>setUserProfileEditor(false)}/>}
           </div>
           <div className="profile-row">
             <div className="profile-header">

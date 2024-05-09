@@ -6,6 +6,7 @@ import { ErrorPage } from 'src/pages/ErrorPage';
 import { HomePage } from 'src/pages/HomePage';
 import { ProfilePage } from 'src/pages/ProfilePage';
 import { PretectedRoutes } from './ProtectedRoutes';
+import { AllDataWithPagination } from 'src/pages/AllDataWithPagination';
 
 export const Navigation: FC = () => {
   return (
@@ -14,6 +15,7 @@ export const Navigation: FC = () => {
         <Route path="/" element={<MainLauoyt />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/pagination" element={<AllDataWithPagination />} />
           <Route path="*" element={<ErrorPage />} />
 
           <Route element={<PretectedRoutes />}>

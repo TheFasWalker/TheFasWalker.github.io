@@ -11,7 +11,7 @@ type Operation = {
   desc?: string;
   amount: number;
   id: string;
-  deleteFunc: () => void;
+  deleteFunc?: () => void;
 };
 
 export const OperationPreview: FC<Operation> = ({ name, desc, amount, id, deleteFunc }) => {

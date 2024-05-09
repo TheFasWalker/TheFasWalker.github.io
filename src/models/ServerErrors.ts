@@ -27,3 +27,11 @@ enum ErrorCode {
 
   ERR_INTERNAL_SERVER = 'ERR_INTERNAL_SERVER', // Серверная ошибка. Обратитесь ко мне, этой ошибки быть не должно
 }
+
+
+export const errorMessages: { [key: string]: string } = {
+  ERR_INCORRECT_EMAIL_OR_PASSWORD: 'Некорректный email или пароль',
+  ERR_ACCOUNT_ALREADY_EXIST: 'Пользователь с таким email уже существует',
+  ERR_VALIDATION_ERROR: 'Некорректный пароль или email',
+  ERR_BAD_REQUEST: 'Ошибка запроса',
+};

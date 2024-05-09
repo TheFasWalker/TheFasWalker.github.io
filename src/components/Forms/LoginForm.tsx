@@ -9,16 +9,12 @@ import { autorisation, registration } from 'src/store/redusers/ActionCreater';
 import { validateField } from './helpers/validation';
 import { Loader } from '../Loader/Loader';
 import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
+import { errorMessages } from 'src/models/ServerErrors';
 
-const errorMessages: { [key: string]: string } = {
-  ERR_INCORRECT_EMAIL_OR_PASSWORD: 'Некорректный email или пароль',
-  ERR_ACCOUNT_ALREADY_EXIST: 'Пользователь с таким email уже существует',
-  ERR_VALIDATION_ERROR: 'Некорректный пароль или email',
-  ERR_BAD_REQUEST: 'Ошибка запроса',
-};
+
 // const loginData = {
 //   login: 'test42@test42.test',
-//   password: 'qwerasdf1',
+//   password: 'qwerasdf',
 // };
 // const loginData2 = {
 //   login: 'test42@test422.test',

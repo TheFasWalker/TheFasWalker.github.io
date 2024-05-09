@@ -4,3 +4,7 @@ export interface Profile {
   email: string;
   signUpDate: Date;
 }
+
+export type UpdateProfileBody = {
+  name: string;
+};

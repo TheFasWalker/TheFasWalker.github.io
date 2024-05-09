@@ -1,0 +1,11 @@
+.pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.buttonsWrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}

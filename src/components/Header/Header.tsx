@@ -61,6 +61,9 @@ export const Header = () => {
             <NavLink className={cl.navItem} to="/catalog">
               Каталог
             </NavLink>
+            <NavLink className={cl.navItem} to="/pagination">
+              Страница с пагинацией
+            </NavLink>
             {!authState || (
               <NavLink className={cl.navItem} to="/profile">
                 профиль

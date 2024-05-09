@@ -7,7 +7,7 @@ import { authSlice } from './authSlice';
 import { fetchData } from 'src/client/fetch';
 import { writeCookies } from 'src/components/helpers/cookies';
 import { profileSlice } from './userDataSlice';
-import { Profile } from 'src/models/userData';
+import { Profile, UpdateProfileBody } from 'src/models/userData';
 import { AuthResult } from 'src/models/IAuthResult';
 import { categoriesSlice } from './categoriesSlice';
 import { CreateCategory } from 'src/models/category';
@@ -134,6 +134,27 @@ export const userData = (token: string) => async (dispatch: AppDispatch) => {
     dispatch(profileSlice.actions.profileError(e));
   }
 };
+export const userDataEdit = (token: string, name?: string) => async (dispatch: AppDispatch) => {
+
+  const data = {
+    name:name
+  }
+  try {
+    dispatch(profileSlice.actions.profileStartLoading())
+    const response = fetchData<Profile>('/profile', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    dispatch(profileSlice.actions.profileSuccess((await response)))
+
+  } catch (e) {
+    dispatch(profileSlice.actions.profileError(e))
+  }
+}
 
 export const getCategories = (token: string) => async (dispatch: AppDispatch) => {
   try {
@@ -193,3 +214,32 @@ export const editCategory = (token: string, id: string, data: CreateCategory) =>
     dispatch(categoriesSlice.actions.categoriesFetchingError(e.message));
   }
 };
+
+
+
+
+export const getSortedOperationsWithPagination = (ItemPerPage:number, activePage:number,sottingType:string,sortinfField?:string,) => async (dispatch: AppDispatch) => {
+  const searchParams = new URLSearchParams({
+    pagination: JSON.stringify({
+      pageSize: ItemPerPage,
+      pageNumber:activePage
+    }),
+    sorting: JSON.stringify({ type:sottingType,field:'name'})
+  }).toString()
+
+
+  try {
+    dispatch(operationsSlice.actions.operationsFetching())
+    const response = axios.get<IOperation>(`${URL}/operations?${searchParams}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+
+    });
+    console.log((await response).data)
+    dispatch(operationsSlice.actions.operationsFetchingSuccess((await response).data))
+  } catch (e) {
+    dispatch (operationsSlice.actions.operationsFetchingError(e.message))
+}
+
+}
