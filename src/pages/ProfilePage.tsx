@@ -34,8 +34,8 @@ export const ProfilePage = () => {
     openPopupWithDataFromURL();
   }, []);
   useEffect(() => {
-    setUserProfileEditor(false)
-},[profile])
+    setUserProfileEditor(false);
+  }, [profile]);
   return (
     <>
       <PopupWrapper visible={creatingCategoryPopup} close={() => setCreatingCategoryPopup(!creatingCategoryPopup)}>
@@ -64,9 +64,7 @@ export const ProfilePage = () => {
                 </div>
               </>
             )}
-            {userProfileEditor && <UserDaraEdit
-              profileData={profile}
-            close={()=>setUserProfileEditor(false)}/>}
+            {userProfileEditor && <UserDaraEdit profileData={profile} />}
           </div>
           <div className="profile-row">
             <div className="profile-header">

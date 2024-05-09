@@ -11,7 +11,6 @@ import { Loader } from '../Loader/Loader';
 import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
 import { errorMessages } from 'src/models/ServerErrors';
 
-
 // const loginData = {
 //   login: 'test42@test42.test',
 //   password: 'qwerasdf',

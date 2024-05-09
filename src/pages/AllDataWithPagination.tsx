@@ -7,31 +7,28 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { getSortedOperationsWithPagination } from 'src/store/redusers/ActionCreater';
 
 export const AllDataWithPagination: FC = () => {
-	const dispatch = useAppDispatch()
-
-
+  const dispatch = useAppDispatch();
 
   const baseItemsPerPage = 9;
   const [activePage, setActivePage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(baseItemsPerPage);
   const [sortingType, setSortingType] = useState<string>();
-  const token = useAppSelector(state=>state.authReduser.token)
+  // const token = useAppSelector((state) => state.authReduser.token);
   const changeActivePage = (newCount: number) => {
     setActivePage(newCount);
   };
   const changeItemsPerPage = (newItemsCount: number) => {
     setItemsPerPage(newItemsCount);
   };
-const {error,isLoading,operations}=useAppSelector((state)=>state.operationsReduser)
+  const { isLoading, operations } = useAppSelector((state) => state.operationsReduser);
 
   useEffect(() => {
-    dispatch(getSortedOperationsWithPagination(itemsPerPage, activePage, sortingType,token))
-
-  }, [activePage, itemsPerPage, sortingType])
-console.log(operations.pagination.total)
+    dispatch(getSortedOperationsWithPagination(itemsPerPage, activePage, sortingType));
+  }, [activePage, itemsPerPage, sortingType, dispatch]);
+  console.log(operations.pagination.total);
   return (
     <>
-      {isLoading && <Loader/>}
+      {isLoading && <Loader />}
       <div
         className="container"
         style={{
@@ -48,20 +45,19 @@ console.log(operations.pagination.total)
             gap: '25px',
           }}
         >
-          <ButtonSorting
-            onClickEvent={() => setSortingType('ASC')}
-            children={'sotringType 1'}
-            activity={sortingType == 'ASC' && true}
-          />
+          <ButtonSorting onClickEvent={() => setSortingType('ASC')} activity={sortingType == 'ASC' && true}>
+            sotringType 1
+          </ButtonSorting>
 
-          <ButtonSorting
-            onClickEvent={() => setSortingType('DESC')}
-            children={'sotringType 2'}
-            activity={sortingType == 'DESC' && true}
-          />
-              </div>
+          <ButtonSorting onClickEvent={() => setSortingType('DESC')} activity={sortingType == 'DESC' && true}>
+            sotringType 2
+          </ButtonSorting>
+        </div>
 
-        <div className='operationWithSortingWrapper' style={{ display: "grid", gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+        <div
+          className="operationWithSortingWrapper"
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}
+        >
           {operations.data.map((operation) => (
             <OperationPreview
               key={operation.id}
@@ -69,10 +65,8 @@ console.log(operations.pagination.total)
               desc={operation.desc}
               amount={operation.amount}
               id={operation.id}
-             />
+            />
           ))}
-
-
         </div>
 
         <Pagination

@@ -11,7 +11,7 @@ type paginationProps = {
   changeActivePage: (newCount: number) => void;
   changeItemsPerPage: (newItemsCount: number) => void;
   baseItemsPerPageConst: number;
-  showMoreButton:boolean
+  showMoreButton: boolean;
 };
 
 export const Pagination: FC<paginationProps> = ({
@@ -21,22 +21,21 @@ export const Pagination: FC<paginationProps> = ({
   changeActivePage,
   changeItemsPerPage,
   baseItemsPerPageConst,
-  showMoreButton
+  showMoreButton,
 }) => {
-
   let pagesButtonsCount = Math.floor(totalItemCount / itemsPerPage);
   if (totalItemCount % itemsPerPage) {
     pagesButtonsCount++;
   }
-  const showShowMoreButtom = showMoreButton && !(activePageNumber == pagesButtonsCount)
-  const showPrevButtonArrow = pagesButtonsCount > 1 && activePageNumber != 1
-  const showNextButtonArrow = pagesButtonsCount > 1 && activePageNumber != pagesButtonsCount
+  const showShowMoreButtom = showMoreButton && !(activePageNumber == pagesButtonsCount);
+  const showPrevButtonArrow = pagesButtonsCount > 1 && activePageNumber != 1;
+  const showNextButtonArrow = pagesButtonsCount > 1 && activePageNumber != pagesButtonsCount;
   const pagesButtonsToRender = Array.from({ length: pagesButtonsCount }, (_, index) => index + 1);
 
   const changeTotalItemsToShowOnPageAtOnce = () => {
     let newItemsPerPageCount;
     if (baseItemsPerPageConst + itemsPerPage > totalItemCount) {
-      let itemsCountOnLastNotFullPage =
+      const itemsCountOnLastNotFullPage =
         totalItemCount - Math.floor(totalItemCount / baseItemsPerPageConst) * baseItemsPerPageConst;
       newItemsPerPageCount = itemsPerPage + itemsCountOnLastNotFullPage;
     } else {
@@ -57,14 +56,14 @@ export const Pagination: FC<paginationProps> = ({
   };
   const currentPage = () => {
     const buttonElem = event.target as HTMLButtonElement;
-    let buttonNumber = Number(buttonElem.dataset.pagenumber);
+    const buttonNumber = Number(buttonElem.dataset.pagenumber);
 
     changeActivePage(buttonNumber);
   };
 
   return (
     <>
-      {pagesButtonsCount != 1  ? (
+      {pagesButtonsCount != 1 ? (
         <div className={cl.pagination}>
           <div className={cl.buttonsWrapper}>
             {showPrevButtonArrow ? <ButtonArrow rotate={true} onClick={() => prevPage()} /> : null}
@@ -77,10 +76,9 @@ export const Pagination: FC<paginationProps> = ({
               />
             ))}
             {showNextButtonArrow ? <ButtonArrow onClick={() => nextPage()} /> : null}
-
           </div>
 
-         {showShowMoreButtom && <Button onClick={() => changeTotalItemsToShowOnPageAtOnce()}>Показать еще</Button>}
+          {showShowMoreButtom && <Button onClick={() => changeTotalItemsToShowOnPageAtOnce()}>Показать еще</Button>}
         </div>
       ) : null}
     </>
