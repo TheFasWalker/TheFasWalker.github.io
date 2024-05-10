@@ -1,12 +1,13 @@
 import React, { FC, useEffect } from 'react';
-import cl from './LoginForm.module.scss';
+import cl from './FormStyles.module.scss';
 import { Field, Form, Formik } from 'formik';
 import { validateField } from './helpers/validation';
 import { ButtonSubmit } from '../ui/Button/ButtonSubmit';
 import { ButtonExit } from '../ui/Button/ButtonExit';
 import { Operation } from 'src/models/IOperation';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { editOperaton, getCategories } from 'src/store/redusers/ActionCreater';
+import { editOperaton } from 'src/store/redusers/Actions/operationsActions';
+import { getCategories } from 'src/store/redusers/Actions/categoryActions';
 
 type editOperationProps = {
   closeEdition: () => void;

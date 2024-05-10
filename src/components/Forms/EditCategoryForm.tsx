@@ -1,11 +1,12 @@
 import { Field, Form, Formik } from 'formik';
 import React, { FC } from 'react';
-import cl from './LoginForm.module.scss';
+import cl from './FormStyles.module.scss';
 import { validateField } from './helpers/validation';
 import { ButtonSubmit } from '../ui/Button/ButtonSubmit';
 import { ButtonExit } from '../ui/Button/ButtonExit';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { editCategory } from 'src/store/redusers/ActionCreater';
+import { editCategory } from 'src/store/redusers/Actions/categoryActions';
+
 
 type EditCategoryFornProps = {
   name: string;

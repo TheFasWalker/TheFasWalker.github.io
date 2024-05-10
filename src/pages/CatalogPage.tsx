@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Loader } from 'src/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { deleteOperationById, fetchOperations } from 'src/store/redusers/ActionCreater';
 import { ButtonSorting } from 'src/components/ui/Button/ButtonSorting';
 import { Button } from 'src/components/ui/Button/Button';
 import { OperationPreview } from 'src/components/OperationPreview/OperationPreview';
 import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
 import { PopupWrapper } from 'src/components/PopupWrapper/PopupWrapper';
 import { CreateOperationForm } from 'src/components/Forms/CreateOperationForm';
+import { fetchOperations,deleteOperationById } from 'src/store/redusers/Actions/operationsActions';
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();

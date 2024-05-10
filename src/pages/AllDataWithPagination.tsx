@@ -4,7 +4,7 @@ import { OperationPreview } from 'src/components/OperationPreview/OperationPrevi
 import { Pagination } from 'src/components/HOC/Pagination/Pagination';
 import { ButtonSorting } from 'src/components/ui/Button/ButtonSorting';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { getSortedOperationsWithPagination } from 'src/store/redusers/ActionCreater';
+import { getSortedOperationsWithPagination } from 'src/store/redusers/Actions/operationsActions';
 
 export const AllDataWithPagination: FC = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +13,6 @@ export const AllDataWithPagination: FC = () => {
   const [activePage, setActivePage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(baseItemsPerPage);
   const [sortingType, setSortingType] = useState<string>();
-  // const token = useAppSelector((state) => state.authReduser.token);
   const changeActivePage = (newCount: number) => {
     setActivePage(newCount);
   };
@@ -25,7 +24,6 @@ export const AllDataWithPagination: FC = () => {
   useEffect(() => {
     dispatch(getSortedOperationsWithPagination(itemsPerPage, activePage, sortingType));
   }, [activePage, itemsPerPage, sortingType, dispatch]);
-  console.log(operations.pagination.total);
   return (
     <>
       {isLoading && <Loader />}

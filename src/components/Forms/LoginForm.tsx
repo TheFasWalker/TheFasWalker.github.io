@@ -1,15 +1,15 @@
 import { Field, Form, Formik } from 'formik';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Button } from '../ui/Button/Button';
-import cl from './LoginForm.module.scss';
+import cl from './FormStyles.module.scss';
 import { generateComandId } from '../helpers/generateComandId';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { autorisation, registration } from 'src/store/redusers/ActionCreater';
-
 import { validateField } from './helpers/validation';
 import { Loader } from '../Loader/Loader';
 import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
 import { errorMessages } from 'src/models/ServerErrors';
+import { autorisation } from 'src/store/redusers/Actions/autorisationAction';
+import { registration } from 'src/store/redusers/Actions/registrationAcrion';
 
 // const loginData = {
 //   login: 'test42@test42.test',

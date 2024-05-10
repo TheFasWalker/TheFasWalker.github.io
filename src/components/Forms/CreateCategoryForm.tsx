@@ -1,10 +1,10 @@
 import { Field, Form, Formik } from 'formik';
 import React, { FC } from 'react';
-import cl from './LoginForm.module.scss';
+import cl from './FormStyles.module.scss';
 import { Button } from '../ui/Button/Button';
 import { useAppDispatch } from 'src/hooks/redux';
-import { createCategorie } from 'src/store/redusers/ActionCreater';
 import { validateField } from './helpers/validation';
+import { createCategorie } from 'src/store/redusers/Actions/categoryActions';
 
 type createCategoryProps = {
   close: () => void;

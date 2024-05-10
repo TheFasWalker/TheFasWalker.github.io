@@ -1,9 +1,9 @@
 import { Field, Form, Formik } from 'formik';
 import React, { FC } from 'react';
-import cl from './LoginForm.module.scss';
+import cl from './FormStyles.module.scss';
 import { ButtonSubmit } from '../ui/Button/ButtonSubmit';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { userDataEdit } from 'src/store/redusers/ActionCreater';
+import { userDataEdit } from 'src/store/redusers/Actions/UserActions';
 import { errorMessages } from 'src/models/ServerErrors';
 
 type userEditPropsType = {
