@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import { validateField } from './helpers/validation';
 import { ButtonSubmit } from '../ui/Button/ButtonSubmit';
 import { ButtonExit } from '../ui/Button/ButtonExit';
-import { Operation } from 'src/models/IOperation';
+import { Operation } from 'src/models/Operation';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { editOperaton } from 'src/store/redusers/Actions/operationsActions';
 import { getCategories } from 'src/store/redusers/Actions/categoryActions';

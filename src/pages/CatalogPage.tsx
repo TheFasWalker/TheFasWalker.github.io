@@ -7,7 +7,7 @@ import { OperationPreview } from 'src/components/OperationPreview/OperationPrevi
 import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
 import { PopupWrapper } from 'src/components/PopupWrapper/PopupWrapper';
 import { CreateOperationForm } from 'src/components/Forms/CreateOperationForm';
-import { fetchOperations,deleteOperationById } from 'src/store/redusers/Actions/operationsActions';
+import { fetchOperations, deleteOperationById } from 'src/store/redusers/Actions/operationsActions';
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();

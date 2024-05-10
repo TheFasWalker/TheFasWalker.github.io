@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IOperation, Operation } from 'src/models/IOperation';
+import { IOperation, Operation } from 'src/models/Operation';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface OperationsState {

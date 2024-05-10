@@ -7,7 +7,6 @@ import { ButtonExit } from '../ui/Button/ButtonExit';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { editCategory } from 'src/store/redusers/Actions/categoryActions';
 
-
 type EditCategoryFornProps = {
   name: string;
   id: string;

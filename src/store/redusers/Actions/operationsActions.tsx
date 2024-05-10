@@ -1,77 +1,75 @@
-import axios from "axios";
-import { IOperation, Operation, OperationCreate } from "src/models/IOperation";
-import {operationsSlice }from "../operationsSlice";
-import { AppDispatch } from "src/store/store";
-import { URL } from 'src/client/config'
-
-
+import axios from 'axios';
+import { IOperation, Operation, OperationCreate } from 'src/models/Operation';
+import { operationsSlice } from '../operationsSlice';
+import { AppDispatch } from 'src/store/store';
+import { URL } from 'src/client/config';
 
 export const fetchOperations = (token: string) => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(operationsSlice.actions.operationsFetching());
-      let response;
-      if (token) {
-        response = axios.get<IOperation>(`${URL}/operations`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-      } else {
-        response = axios.get<IOperation>(`${URL}/operations`);
-      }
-      dispatch(operationsSlice.actions.operationsFetchingSuccess((await response).data));
-    } catch (e) {
-      dispatch(operationsSlice.actions.operationsFetchingError(e.message));
+  try {
+    dispatch(operationsSlice.actions.operationsFetching());
+    let response;
+    if (token) {
+      response = axios.get<IOperation>(`${URL}/operations`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+    } else {
+      response = axios.get<IOperation>(`${URL}/operations`);
     }
+    dispatch(operationsSlice.actions.operationsFetchingSuccess((await response).data));
+  } catch (e) {
+    dispatch(operationsSlice.actions.operationsFetchingError(e.message));
+  }
 };
 
 export const deleteOperationById = (token: string, id: string) => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(operationsSlice.actions.operationsFetching());
-      axios.delete(`${URL}/operations/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      dispatch(operationsSlice.actions.operationsDeleteOperationById(id));
-    } catch (e) {
-      dispatch(operationsSlice.actions.operationsFetchingError(e.message));
-    }
+  try {
+    dispatch(operationsSlice.actions.operationsFetching());
+    axios.delete(`${URL}/operations/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    dispatch(operationsSlice.actions.operationsDeleteOperationById(id));
+  } catch (e) {
+    dispatch(operationsSlice.actions.operationsFetchingError(e.message));
+  }
 };
 
 export const crateOperation = (token: string, data: OperationCreate) => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(operationsSlice.actions.operationsFetching());
+  try {
+    dispatch(operationsSlice.actions.operationsFetching());
 
-      const response = axios.post<Operation>(`${URL}/operations`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+    const response = axios.post<Operation>(`${URL}/operations`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
 
-      dispatch(operationsSlice.actions.operationCreating((await response).data));
-    } catch (e) {
-      dispatch(operationsSlice.actions.operationsFetchingError(e.message));
-    }
+    dispatch(operationsSlice.actions.operationCreating((await response).data));
+  } catch (e) {
+    dispatch(operationsSlice.actions.operationsFetchingError(e.message));
+  }
 };
 
 export const editOperaton = (token: string, id: string, data: OperationCreate) => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(operationsSlice.actions.operationsFetching());
+  try {
+    dispatch(operationsSlice.actions.operationsFetching());
 
-      const response = axios.put<Operation>(`${URL}/operations/${id}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      dispatch(operationsSlice.actions.operationEdit((await response).data));
-    } catch (e) {
-      dispatch(operationsSlice.actions.operationsFetchingError(e.message));
-    }
+    const response = axios.put<Operation>(`${URL}/operations/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    dispatch(operationsSlice.actions.operationEdit((await response).data));
+  } catch (e) {
+    dispatch(operationsSlice.actions.operationsFetchingError(e.message));
+  }
 };
 
 export const getSortedOperationsWithPagination =

@@ -6,6 +6,7 @@ import { DeleteButton } from '../ui/Button/DeleteButton';
 import { useAppSelector } from 'src/hooks/redux';
 
 import { EditOperation } from '../Forms/EditOperation';
+import { Operation } from 'src/models/Operation';
 
 type operationDetailsProps = {
   id: string;
@@ -34,7 +35,7 @@ export const OperationsDetail: FC<operationDetailsProps> = ({
   };
 
   const operations = useAppSelector((state) => state.operationsReduser.operations.data);
-  const operationElement = operations.find((elem) => elem.id == id);
+  const operationElement = operations.find((elem: Operation) => elem.id == id);
 
   return (
     <PopupWrapper visible={visible} close={() => close()}>

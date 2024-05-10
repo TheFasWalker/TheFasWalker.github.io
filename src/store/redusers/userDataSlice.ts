@@ -44,7 +44,7 @@ export const profileSlice = createSlice({
     },
     profileError(state, action: PayloadAction<ServerErrors>) {
       state.isLoading = false;
-      console.log(action.payload)
+      console.log(action.payload);
       state.error = action.payload.errors[0].extensions.code;
     },
   },
