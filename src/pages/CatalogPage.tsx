@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Loader } from 'src/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { ButtonSorting } from 'src/components/ui/Button/ButtonSorting';
+
 import { Button } from 'src/components/ui/Button/Button';
 import { OperationPreview } from 'src/components/OperationPreview/OperationPreview';
 import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
@@ -32,18 +32,6 @@ export const CatalogPage = () => {
             {token != '' ? (
               <Button onClick={() => setCtreateOperationPopuState(!ctreateOperationPopuState)}>Create Operation</Button>
             ) : null}
-            <ButtonSorting
-              onClickEvent={() => console.log('sss')}
-              // activity={true}
-            >
-              get data
-            </ButtonSorting>
-            <ButtonSorting
-              onClickEvent={() => console.log('token')}
-              // activity={true}
-            >
-              sorting type 2
-            </ButtonSorting>
           </div>
         </header>
         <div className="content operationContent">

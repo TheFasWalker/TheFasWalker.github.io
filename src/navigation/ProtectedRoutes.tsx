@@ -6,5 +6,5 @@ import { useAppSelector } from 'src/hooks/redux';
 export const PretectedRoutes: FC = () => {
   const authState = useAppSelector((state) => state.authReduser.token);
 
-  return !authState ? <Navigate to="/" replace /> : <Outlet />;
+  return !authState ? <Navigate to="/404" replace /> : <Outlet />;
 };

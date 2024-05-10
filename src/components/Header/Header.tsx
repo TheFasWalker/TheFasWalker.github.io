@@ -69,9 +69,6 @@ export const Header = () => {
                 профиль
               </NavLink>
             )}
-            <NavLink className={cl.navItem} to="/profileasd">
-              error page
-            </NavLink>
           </nav>
           {!authState ? (
             <Button onClick={() => setPopupState(!popupState)} elementClass={cl.logIn}>

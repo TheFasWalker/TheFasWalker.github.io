@@ -10,15 +10,7 @@ import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAu
 import { errorMessages } from 'src/models/ServerErrors';
 import { autorisation } from 'src/store/redusers/Actions/autorisationAction';
 import { registration } from 'src/store/redusers/Actions/registrationAcrion';
-
-// const loginData = {
-//   login: 'test42@test42.test',
-//   password: 'qwerasdf',
-// };
-// const loginData2 = {
-//   login: 'test42@test422.test',
-//   password: 'test42@test422.test',
-// };
+// import { loginData } from 'src/helpers/fakeLoginData';
 
 type loginFormProps = {
   close?: () => void;
