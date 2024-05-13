@@ -37,7 +37,7 @@ export const CatalogPage = () => {
         <div className="content operationContent">
           {isLoading && <Loader />}
           {error && <span>Ошибка загрузки данных</span>}
-          {operations.data.length == 0 ? (
+          {operations.data.length == 0 &&  token != '' ? (
             <div className="noOperations">
               <h2>у вас еще нет операций</h2>
               <Button onClick={() => setCtreateOperationPopuState(!ctreateOperationPopuState)}>
