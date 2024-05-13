@@ -22,19 +22,21 @@ export const ProfilePage = () => {
   const { isLoading: categoryIsLoading } = useAppSelector((state) => state.categoryReduser);
   const data = useAppSelector(selectMemoizedCategoryState);
   const location = useLocation();
-  const params = queryString.parse(location.search);
+
   const [userProfileEditor, setUserProfileEditor] = useState<boolean>(false);
   const [creatingCategoryPopup, setCreatingCategoryPopup] = useState<boolean>(false);
-  const openPopupWithDataFromURL = () => {
-    if (params.popup === 'true') {
-      setCreatingCategoryPopup(true);
-    }
-  };
+
   useEffect(() => {
+    const params = queryString.parse(location.search);
+    const openPopupWithDataFromURL = () => {
+      if (params.popup === 'true') {
+        setCreatingCategoryPopup(true);
+      }
+    };
     dispatch(userData(token));
     dispatch(getCategories(token));
     openPopupWithDataFromURL();
-  }, []);
+  }, [dispatch, token, location]);
   useEffect(() => {
     setUserProfileEditor(false);
   }, [profile]);

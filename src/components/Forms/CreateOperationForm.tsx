@@ -25,7 +25,7 @@ export const CreateOperationForm: FC<CreateOperationForm> = ({ token, closeFunc 
 
   useEffect(() => {
     dispatch(getCategories(token));
-  }, []);
+  }, [dispatch, token]);
 
   return (
     <>

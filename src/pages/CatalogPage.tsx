@@ -17,7 +17,7 @@ export const CatalogPage = () => {
 
   useEffect(() => {
     dispatch(fetchOperations(token));
-  }, []);
+  }, [dispatch, token]);
 
   useEffect(() => {
     dispatch(fetchOperations(token));

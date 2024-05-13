@@ -32,7 +32,7 @@ export const Header = () => {
     if (authState != '') {
       writeCookies('LoginToken', authState);
     }
-  }, []);
+  }, [authState, dispatch]);
   return (
     <>
       <header className={cl.header}>
