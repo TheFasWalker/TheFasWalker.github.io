@@ -17,10 +17,11 @@ type operationDetailsProps = {
   editFormVisibility: boolean;
   openFormVisibility: () => void;
   token: string;
+  visibilityElementActions: boolean;
 };
 
 export const OperationsDetail: FC<operationDetailsProps> = ({
-  token,
+  visibilityElementActions,
   id,
   close,
   visible,
@@ -72,7 +73,7 @@ export const OperationsDetail: FC<operationDetailsProps> = ({
             <span>Обновления операции:</span>
             <span>{operationElement.createdAt}</span>
           </div>
-          {token && (
+          {visibilityElementActions && (
             <div className={cl.buttons}>
               <DeleteButton onClick={() => deleteItem()} />
               <EditButton onClick={() => openFormVisibility()} />

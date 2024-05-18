@@ -18,6 +18,7 @@ export const Header = () => {
   const closePopupForm = () => {
     setPopupState(!popupState);
     dispatch(authSlice.actions.authCleanErrors());
+    console.log('closePopupForm1111');
   };
 
   const logOut = () => {
@@ -27,7 +28,9 @@ export const Header = () => {
 
   useEffect(() => {
     if (getCookie('LoginToken')) {
-      dispatch(authSlice.actions.authWithCookies(getCookie('LoginToken')));
+      const token = getCookie('LoginToken');
+      const commandId = getCookie('commandId');
+      dispatch(authSlice.actions.authWithCookies({ token: token, commandId: commandId }));
     }
     if (authState != '') {
       writeCookies('LoginToken', authState);

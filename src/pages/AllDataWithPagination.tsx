@@ -4,11 +4,12 @@ import { OperationPreview } from 'src/components/OperationPreview/OperationPrevi
 import { Pagination } from 'src/components/HOC/Pagination/Pagination';
 import { ButtonSorting } from 'src/components/ui/Button/ButtonSorting';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { getSortedOperationsWithPagination } from 'src/store/redusers/Actions/operationsActions';
+import { deleteOperationById, getSortedOperationsWithPagination } from 'src/store/redusers/Actions/operationsActions';
+import { selectMemoizedAutorizationState } from 'src/store/memo/selectMemoizedAutorizationState';
 
 export const AllDataWithPagination: FC = () => {
   const dispatch = useAppDispatch();
-
+  const token = useAppSelector(selectMemoizedAutorizationState);
   const baseItemsPerPage = 9;
   const [activePage, setActivePage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(baseItemsPerPage);
@@ -63,6 +64,8 @@ export const AllDataWithPagination: FC = () => {
               desc={operation.desc}
               amount={operation.amount}
               id={operation.id}
+              commandId={operation.commandId}
+              deleteFunc={() => dispatch(deleteOperationById(token, operation.id))}
             />
           ))}
         </div>

@@ -19,10 +19,6 @@ export const CatalogPage = () => {
     dispatch(fetchOperations(token));
   }, [dispatch, token]);
 
-  useEffect(() => {
-    dispatch(fetchOperations(token));
-  }, [dispatch, token]);
-
   return (
     <>
       <div className="container">
@@ -37,7 +33,7 @@ export const CatalogPage = () => {
         <div className="content operationContent">
           {isLoading && <Loader />}
           {error && <span>Ошибка загрузки данных</span>}
-          {operations.data.length == 0 &&  token != '' ? (
+          {operations.data.length == 0 && token != '' ? (
             <div className="noOperations">
               <h2>у вас еще нет операций</h2>
               <Button onClick={() => setCtreateOperationPopuState(!ctreateOperationPopuState)}>
@@ -53,6 +49,7 @@ export const CatalogPage = () => {
                   desc={operation.desc}
                   amount={operation.amount}
                   id={operation.id}
+                  commandId={operation.commandId}
                   deleteFunc={() => dispatch(deleteOperationById(token, operation.id))}
                 />
               ))}

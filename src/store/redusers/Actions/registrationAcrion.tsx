@@ -19,7 +19,7 @@ export const registration = (email: string, password: string, commandId: string)
       },
       body: JSON.stringify(data),
     });
-    dispatch(authSlice.actions.authSuccess((await response).token));
+    dispatch(authSlice.actions.authSuccess(await response));
     writeCookies('LoginToken', (await response).token);
   } catch (e) {
     dispatch(authSlice.actions.authError(e));

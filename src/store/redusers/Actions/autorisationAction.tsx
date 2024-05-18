@@ -20,8 +20,9 @@ export const autorisation = (email: string, password: string, commandId?: string
       },
       body: JSON.stringify(data),
     });
-    dispatch(authSlice.actions.authSuccess((await response).token));
+    dispatch(authSlice.actions.authSuccess(await response));
     writeCookies('LoginToken', (await response).token);
+    writeCookies('commandId', (await response).profile.commandId);
   } catch (e) {
     dispatch(authSlice.actions.authError(e));
   }

@@ -13,7 +13,7 @@ import { registration } from 'src/store/redusers/Actions/registrationAcrion';
 // import { loginData } from 'src/helpers/fakeLoginData';
 
 type loginFormProps = {
-  close?: () => void;
+  close: () => void;
 };
 
 export const LoginForm: FC<loginFormProps> = ({ close }) => {
@@ -32,10 +32,12 @@ export const LoginForm: FC<loginFormProps> = ({ close }) => {
   const logIn = (email: string, password: string) => {
     dispatch(autorisation(email, password));
   };
+
   const memoizedClose = useCallback(() => {
     if (tokenData !== '') {
       close();
     }
+    // eslint-disable-next-line
   }, [tokenData]);
   useEffect(() => {
     memoizedClose();

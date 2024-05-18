@@ -12,12 +12,15 @@ type Operation = {
   amount: number;
   id: string;
   deleteFunc?: () => void;
+  commandId: string | null;
 };
 
-export const OperationPreview: FC<Operation> = ({ name, desc, amount, id, deleteFunc }) => {
+export const OperationPreview: FC<Operation> = ({ name, desc, amount, id, deleteFunc, commandId }) => {
   const [detatilsPopupState, setDetatilsPopupState] = useState<boolean>(false);
   const [editFormVisibility, setEditFormVisibility] = useState<boolean>(true);
   const token = useAppSelector((state) => state.authReduser.token);
+  const userCommandId = useAppSelector((state) => state.authReduser.commandId) == commandId;
+  const showOperationsWithElement = token != '' && userCommandId;
   const closePopup = () => {
     setDetatilsPopupState(!detatilsPopupState);
     setEditFormVisibility(true);
@@ -39,7 +42,7 @@ export const OperationPreview: FC<Operation> = ({ name, desc, amount, id, delete
         </div>
         <div className={cl.operationButtons}>
           <Button onClick={() => setDetatilsPopupState(!detatilsPopupState)}>Подробнее</Button>
-          {token && <DeleteButton onClick={deleteFunc} />}
+          {showOperationsWithElement ? <DeleteButton onClick={deleteFunc} /> : null}
         </div>
       </div>
       <OperationsDetail
@@ -51,6 +54,7 @@ export const OperationPreview: FC<Operation> = ({ name, desc, amount, id, delete
         closeFormVisibility={() => setEditFormVisibility(true)}
         openFormVisibility={() => setEditFormVisibility(false)}
         token={token}
+        visibilityElementActions={showOperationsWithElement}
       />
     </>
   );

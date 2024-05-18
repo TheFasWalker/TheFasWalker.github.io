@@ -21,6 +21,7 @@ export interface Operation {
   type: string;
   amount: number;
   category?: Category;
+  commandId: string | null;
 }
 type Category = {
   id: string;
