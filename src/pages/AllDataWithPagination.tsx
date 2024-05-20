@@ -24,7 +24,10 @@ export const AllDataWithPagination: FC = () => {
 
   useEffect(() => {
     dispatch(getSortedOperationsWithPagination(itemsPerPage, activePage, sortingType));
-  }, [activePage, itemsPerPage, sortingType, dispatch]);
+  }, [activePage, itemsPerPage, sortingType, dispatch, operations.data.length]);
+  useEffect(() => {
+
+  })
   return (
     <>
       {isLoading && <Loader />}

@@ -14,6 +14,7 @@ export const userData = (token: string) => async (dispatch: AppDispatch) => {
       },
     });
     dispatch(profileSlice.actions.profileSuccess(await response));
+console.log((await response))
   } catch (e) {
     dispatch(profileSlice.actions.profileError(e));
   }
@@ -25,13 +26,14 @@ export const userDataEdit = (token: string, name?: string) => async (dispatch: A
   try {
     dispatch(profileSlice.actions.profileStartLoading());
     const response = fetchData<Profile>('/profile', {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
+    console.log((await response))
     dispatch(profileSlice.actions.profileSuccess(await response));
   } catch (e) {
     dispatch(profileSlice.actions.profileError(e));
