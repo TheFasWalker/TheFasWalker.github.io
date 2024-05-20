@@ -5,6 +5,7 @@ import { ButtonSubmit } from '../ui/Button/ButtonSubmit';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { userDataEdit } from 'src/store/redusers/Actions/UserActions';
 import { errorMessages } from 'src/models/ServerErrors';
+import { validateUserName } from './helpers/validation';
 
 type userEditPropsType = {
   profileData: {
@@ -32,10 +33,15 @@ export const UserDaraEdit: FC<userEditPropsType> = ({ profileData }) => {
           editUserData(token, values.name);
         }}
       >
-        {() => (
+        {({errors}) => (
           <Form className={cl.editdata}>
             <label>
-              <Field placeholder="Ваше имя" name="name" />
+              <Field
+                placeholder="Ваше имя"
+                name="name"
+                validate={validateUserName}
+              />
+              {errors.name && <div className={cl.error}>{errors.name}</div>}
             </label>
             <ButtonSubmit />
           </Form>
