@@ -33,14 +33,10 @@ export const UserDaraEdit: FC<userEditPropsType> = ({ profileData }) => {
           editUserData(token, values.name);
         }}
       >
-        {({errors}) => (
+        {({ errors }) => (
           <Form className={cl.editdata}>
             <label>
-              <Field
-                placeholder="Ваше имя"
-                name="name"
-                validate={validateUserName}
-              />
+              <Field placeholder="Ваше имя" name="name" validate={validateUserName} />
               {errors.name && <div className={cl.error}>{errors.name}</div>}
             </label>
             <ButtonSubmit />
